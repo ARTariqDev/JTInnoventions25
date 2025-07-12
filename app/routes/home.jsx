@@ -1,4 +1,9 @@
 import Button from "../components/Button";
+import "@fontsource/poppins";
+import "@fontsource/poppins/500.css";
+import "@fontsource/poppins/600.css";
+import "@fontsource/roboto";
+import "@fontsource/roboto/500.css";
 
 export function meta() {
   return [
@@ -9,12 +14,11 @@ export function meta() {
 
 export default function Home() {
   return (
-    <main className="bg-[#111111] min-h-screen flex flex-col items-center justify-center p-8 overflow-visible">
+    <main className="bg-primary min-h-screen flex flex-col items-center justify-center p-8 overflow-visible">
       <h1 className="text-white text-center mb-6">
         Returning a React Fragment for now, will change later
       </h1>
-      <Button text="Button" />
+      <Button text="register" />
     </main>
-
   );
 }

@@ -1,5 +1,12 @@
 @import "tailwindcss";
 
+@theme {
+  --color-primary: #141514;
+  --color-secondary: #1b76ff;
+  --font-poppins: "Poppins", Arial, sans-serif;
+  --font-Roboto: "Roboto", Arial, sans-serif;
+}
+
 @keyframes ripple {
   0% {
     transform: scale(0);
