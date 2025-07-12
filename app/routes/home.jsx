@@ -1,12 +1,19 @@
 import Hero from "../components/Hero";
 import Navbar from "../components/Navbar";
 import SpotlightCanvas from "../components/SpotlightCanvas";
+import Logo from "../assets/logo.png";
 import "@fontsource/poppins";
 import "@fontsource/poppins/500.css";
 import "@fontsource/poppins/600.css";
 import "@fontsource/roboto";
 import "@fontsource/roboto/500.css";
 import "@fontsource/monaspace-neon";
+
+export function links() {
+  return [
+    { rel: "icon", type: "image/png", href: Logo},
+  ];
+}
 
 export function meta() {
   return [

@@ -46,8 +46,8 @@ const Hero = () => {
     >
       <div className="absolute inset-0 bg-gradient-to-b from-[#050c1a]/80 via-[#050c1a]/90 to-[#050c1a]/95 z-0" />
 
-      {/* Floating dots + binary/AI/ML labels */}
-      <div className="absolute inset-0 overflow-hidden z-5 pointer-events-none">
+
+      <div className="absolute inset-0 overflow-hidden z-5 pointer-events-none ">
         <div className="absolute w-2 h-2 bg-blue-400 rounded-full opacity-60 animate-float-1"></div>
         <div className="absolute w-1 h-1 bg-blue-300 rounded-full opacity-40 animate-float-2"></div>
         <div className="absolute w-1.5 h-1.5 bg-blue-500 rounded-full opacity-50 animate-float-3"></div>
@@ -57,12 +57,12 @@ const Hero = () => {
         <div className="absolute w-1.5 h-1.5 bg-blue-300 rounded-full opacity-55 animate-float-7"></div>
         <div className="absolute w-1 h-1 bg-blue-400 rounded-full opacity-35 animate-float-8"></div>
 
-        {/* Floating label texts - always visible now and reduced clutter */}
+
         <div className="absolute top-20 right-4 animate-[fadeIn_2s_ease-in-out]">
-          <div className="bg-black/30 backdrop-blur-sm border border-blue-400/20 rounded-md p-2 animate-pulse">
+          <div className="bg-black/30 backdrop-blur-sm border border-blue-400/20 rounded-md p-2 animate-pulse ">
             <div className="flex items-center space-x-2">
               <div className="w-2 h-2 bg-blue-400 rounded-full animate-ping"></div>
-              <span className="text-blue-400 font-mono text-[10px]">Indulge</span>
+              <span className="text-blue-400 font-mono text-[10px] ">Indulge</span>
             </div>
           </div>
         </div>
