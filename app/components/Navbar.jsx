@@ -1,15 +1,16 @@
 import { useState } from "react";
 import { Link } from "react-router";
+import "../app.css";
 
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const handleClick = () => setIsOpen((prev) => !prev);
 
   return (
-    <nav className="bg-primary w-full pt-3 pb-2 px-3 xs:px-6 md:px-10 mb-2 fixed top-0 left-0 right-0 z-50 font-mono tracking-wider shadow-md shadow-secondary/60">
+    <nav className="bg-blue-900/30 backdrop-blur-md w-full pt-3 pb-2 px-3 xs:px-6 md:px-10 mb-2 fixed top-0 left-0 right-0 z-50 font-mono tracking-wider shadow-md shadow-blue-500/30 transition duration-300">
       <div className="flex flex-col sm:flex-row sm:justify-between mx-auto w-full text-white">
         <div className="flex justify-between items-center">
-          <h2 className="text-lg md:text-2xl">Innoventions</h2>
+          <h2 className="text-lg md:text-2xl">JT Innoventions'25 </h2>
           <button
             onClick={handleClick}
             className="text-gray-400 hover:text-white active:text-white transition-all delay-200 ease-out sm:hidden"
@@ -36,7 +37,7 @@ function Navbar() {
             ${isOpen ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"}`}
         >
           <li className="py-1 sm:px-2 md:px-3">
-            <Link href="">Home</Link>
+            <Link href="#Hero">Home</Link>
           </li>
           <li className="py-1 sm:px-2 md:px-3">
             <Link href="">About</Link>

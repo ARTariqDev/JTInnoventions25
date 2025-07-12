@@ -1,6 +1,6 @@
 import { useRef, useState } from "react";
 
-const Button = ({ text, glowColor = "#1b76ff", onClick }) => {
+const Button = ({ text, glowColor = "#3b82f6", onClick, color = "#3b82f6" }) => {
   const btnRef = useRef(null);
   const [hovered, setHovered] = useState(false);
   const [ripples, setRipples] = useState([]);
@@ -27,14 +27,7 @@ const Button = ({ text, glowColor = "#1b76ff", onClick }) => {
     const id = Date.now();
     onClick && onClick();
 
-    const newRipple = {
-      id,
-      x,
-      y,
-    };
-
-    setRipples((prev) => [...prev, newRipple]);
-
+    setRipples((prev) => [...prev, { id, x, y }]);
     setTimeout(() => {
       setRipples((prev) => prev.filter((r) => r.id !== id));
     }, 500);
@@ -47,31 +40,26 @@ const Button = ({ text, glowColor = "#1b76ff", onClick }) => {
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
       onClick={handleClick}
-      className="font-poppins uppercase tracking-wider cursor-pointer relative px-6 py-2 rounded-md text-white font-medium bg-black overflow-hidden group transition duration-150 active:scale-95 hover:shadow-[0_0_12px_rgba(27,118,255,0.25)] active:shadow-[0_0_16px_rgba(27,118,255,0.35)]"
+      className="relative px-6 py-2 rounded-md text-white font-medium overflow-hidden transition duration-150 active:scale-95 border border-white/20 backdrop-blur-md"
+      style={{
+        backgroundColor: `${color}10`, // ~6% opacity
+      }}
     >
-      <span
-        className="absolute inset-0 z-0 rounded-md p-[0.5px]"
-        aria-hidden="true"
-        style={{
-          background:
-            "linear-gradient(135deg, #1b76ff 10%, #000 60%, #000 100%)",
-        }}
-      >
-        <span className="block w-full h-full rounded-md bg-black" />
-      </span>
-
+      {/* Hover Glow Border */}
       <span
         className="absolute inset-0 pointer-events-none rounded-md border z-10 transition-opacity duration-300 ease-out"
         style={{
           borderColor: glowColor,
-          borderWidth: "1px",
+          borderWidth: "2px",
           opacity: hovered ? 1 : 0,
-          maskImage: `radial-gradient(60px at var(--x, 0px) var(--y, 0px), white 0%, transparent 60%)`,
-          WebkitMaskImage: `radial-gradient(60px at var(--x, 0px) var(--y, 0px), white 0%, transparent 60%)`,
+          maskImage: `radial-gradient(120px at var(--x, 0px) var(--y, 0px), white 0%, transparent 70%)`,
+          WebkitMaskImage: `radial-gradient(120px at var(--x, 0px) var(--y, 0px), white 0%, transparent 70%)`,
           transition: "mask-position 0.05s linear, opacity 0.3s ease-out",
+          boxShadow: hovered ? `0 0 10px ${glowColor}` : 'none',
         }}
       />
 
+      {/* Ripple */}
       {ripples.map((ripple) => (
         <span
           key={ripple.id}
@@ -87,7 +75,9 @@ const Button = ({ text, glowColor = "#1b76ff", onClick }) => {
         />
       ))}
 
-      <span className="relative z-20">{text}</span>
+      <span className="relative z-20 font-poppins uppercase tracking-widest">
+        {text}
+      </span>
     </button>
   );
 };
