@@ -126,7 +126,7 @@ const Hero = () => {
         </div>
       </div>
 
-      <div className="relative mb-2 animate-[fadeIn_2.5s_ease-in-out]">
+      <div className="relative mb-2 animate-[fadeIn_2.5s_ease-in-out] mt-[-1rem]">
         <div className="w-32 h-1 bg-gradient-to-r from-transparent via-white to-transparent opacity-60 animate-pulse"></div>
         <div className="absolute -top-1 left-0 w-4 h-3 bg-blue-400 opacity-60 animate-pulse"></div>
         <div className="absolute -top-1 right-0 w-4 h-3 bg-blue-400 opacity-60 animate-pulse delay-500"></div>
