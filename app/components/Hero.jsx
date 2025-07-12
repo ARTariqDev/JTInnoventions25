@@ -14,7 +14,6 @@ const Hero = () => {
   const [particles, setParticles] = useState([]);
   const heroRef = useRef(null);
 
-
   useEffect(() => {
     if (textAnimationComplete && particles.length === 0) {
       const newParticles = [...Array(100)].map((_, i) => ({
@@ -35,6 +34,7 @@ const Hero = () => {
       setParticles(newParticles);
     }
   }, [textAnimationComplete, particles.length]);
+
 
   useEffect(() => {
     if (lineIndex < lines.length) {
@@ -69,15 +69,15 @@ const Hero = () => {
     const updateParticlesFromPosition = (x, y) => {
       setMousePosition({ x, y });
 
-
+ 
       setParticles(prevParticles => 
         prevParticles.map(particle => {
           const distanceX = Math.abs(particle.x - x);
           const distanceY = Math.abs(particle.y - y);
           const distance = Math.sqrt(distanceX * distanceX + distanceY * distanceY);
           
-          if (distance < 10) { // Within 10% of screen distance
-            const scatterStrength = (10 - distance) * 0.1; // Reduced multiplier for gentler movement
+          if (distance < 12) { // Within 12% of screen distance
+            const scatterStrength = (12 - distance) * 0.3; // Reduced multiplier for gentler movement
             const angle = Math.atan2(particle.y - y, particle.x - x);
             const scatterX = Math.cos(angle) * scatterStrength;
             const scatterY = Math.sin(angle) * scatterStrength;
@@ -92,7 +92,7 @@ const Hero = () => {
             };
           } else if (particle.scattered) {
             // Gradually return to base position
-            const returnSpeed = 0.07; // Slower return for smoother movement
+            const returnSpeed = 0.05; // Slower return for smoother movement
             const newScatterX = particle.scatterX * (1 - returnSpeed);
             const newScatterY = particle.scatterY * (1 - returnSpeed);
             
@@ -133,7 +133,6 @@ const Hero = () => {
 
     const handleTouchMove = (e) => {
       if (!heroRef.current) return;
-      e.preventDefault(); 
       
       const rect = heroRef.current.getBoundingClientRect();
       const touch = e.touches[0];
@@ -162,7 +161,7 @@ const Hero = () => {
       
 
       element.addEventListener('touchstart', handleTouchStart);
-      element.addEventListener('touchmove', handleTouchMove, { passive: false });
+      element.addEventListener('touchmove', handleTouchMove);
       
       return () => {
 
@@ -197,8 +196,8 @@ const Hero = () => {
                   height: `${particle.size}px`,
                   top: `${particle.y}%`,
                   left: `${particle.x}%`,
-                  animation: particle.scattered 
-                    ? 'none' 
+                  animation: particle.scattered
+                    ? 'none'
                     : `float-random ${particle.duration}s ease-in-out ${particle.delay}s infinite`,
                   "--tx": particle.tx + "px",
                   "--ty": particle.ty + "px",
@@ -239,7 +238,7 @@ const Hero = () => {
         </div>
       </div>
 
-
+      
       <div className="absolute inset-0 z-5 opacity-10 pointer-events-none">
         <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-blue-400 to-transparent animate-pulse"></div>
         <div className="absolute top-1/4 left-0 w-full h-0.5 bg-gradient-to-r from-transparent via-cyan-400 to-transparent animate-pulse delay-700"></div>
@@ -247,7 +246,7 @@ const Hero = () => {
         <div className="absolute top-3/4 left-0 w-full h-0.5 bg-gradient-to-r from-transparent via-blue-500 to-transparent animate-pulse delay-300"></div>
       </div>
 
-
+    
       <div className="relative z-10 flex flex-col items-center justify-center text-center px-4 max-w-7xl mx-auto w-full pt-20 pb-10">
         <div className="flex flex-col items-center justify-center gap-6 mb-8 animate-[fadeIn_1s_ease-in-out]">
           <div className="relative flex-shrink-0 animate-[fadeIn_1.5s_ease-in-out]">
@@ -262,7 +261,7 @@ const Hero = () => {
             <div className="absolute -inset-2 rounded-full border border-cyan-400/20 animate-pulse delay-500"></div>
           </div>
 
-
+  
           <div className="text-center px-4">
             <h1 className="text-3xl lg:text-3xl text-white leading-snug font-space min-h-[150px]">
               {displayedText.map((line, index) => (
@@ -280,7 +279,7 @@ const Hero = () => {
           </div>
         </div>
 
-
+   
         <div className="text-center px-4 animate-[fadeIn_2s_ease-in-out] mt-[-3rem]">
           <h1 className="text-xl text-blue-400 leading-snug font-space">
             September 12∘13∘14
