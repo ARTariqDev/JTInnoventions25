@@ -18,7 +18,7 @@ export function links() {
 export function meta() {
   return [
     { title: "JT Innoventions'25" },
-    { name: "description", content: "Welcome to React Router!" },
+    { name: "description", content: "GET READY FOR AN EXCITING CHALLENGE!" },
   ];
 }
 
