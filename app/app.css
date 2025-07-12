@@ -5,6 +5,28 @@
   --color-secondary: #1b76ff;
   --font-poppins: "Poppins", Arial, sans-serif;
   --font-Roboto: "Roboto", Arial, sans-serif;
+  --breakpoint-xs: 30rem; /* 480px*/
+}
+
+nav li {
+  transition: all 0.3s ease-out;
+}
+
+nav li:hover,
+nav li:active {
+  color: #fff;
+}
+
+nav li:not(:last-child) {
+  border-bottom: 1px solid #232830;
+  width: 100%;
+  text-align: center;
+}
+
+@media screen and (min-width: 40rem) {
+  nav li:not(:last-child) {
+    border-bottom: 0;
+  }
 }
 
 @keyframes ripple {

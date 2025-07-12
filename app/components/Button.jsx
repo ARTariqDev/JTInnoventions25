@@ -47,7 +47,7 @@ const Button = ({ text, glowColor = "#1b76ff", onClick }) => {
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
       onClick={handleClick}
-      className="font-poppins uppercase tracking-widest cursor-pointer relative px-6 py-2 rounded-md text-white font-medium bg-black overflow-hidden group transition duration-150 active:scale-95 hover:shadow-[0_0_12px_rgba(27,118,255,0.25)] active:shadow-[0_0_16px_rgba(27,118,255,0.35)]"
+      className="font-poppins uppercase tracking-wider cursor-pointer relative px-6 py-2 rounded-md text-white font-medium bg-black overflow-hidden group transition duration-150 active:scale-95 hover:shadow-[0_0_12px_rgba(27,118,255,0.25)] active:shadow-[0_0_16px_rgba(27,118,255,0.35)]"
     >
       <span
         className="absolute inset-0 z-0 rounded-md p-[0.5px]"

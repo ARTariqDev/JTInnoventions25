@@ -1,9 +1,10 @@
-import Button from "../components/Button";
 import "@fontsource/poppins";
 import "@fontsource/poppins/500.css";
 import "@fontsource/poppins/600.css";
 import "@fontsource/roboto";
 import "@fontsource/roboto/500.css";
+import Button from "../components/Button";
+import Navbar from "../components/Navbar";
 
 export function meta() {
   return [
