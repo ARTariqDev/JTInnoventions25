@@ -1,13 +1,39 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Link } from "react-router";
 import "../app.css";
 
 function Navbar() {
+  const [showNavbar, setShowNavbar] = useState(true);
   const [isOpen, setIsOpen] = useState(false);
+  const prevScrollYRef = useRef(0);
   const handleClick = () => setIsOpen((prev) => !prev);
 
+  useEffect(() => {
+    let timeout;
+    const handleScroll = () => {
+      clearTimeout(timeout);
+      timeout = setTimeout(() => {
+        const scrollY = window.scrollY;
+        if (scrollY > prevScrollYRef.current && scrollY > 55) {
+          setShowNavbar(false);
+        } else {
+          setShowNavbar(true);
+        }
+        prevScrollYRef.current = scrollY;
+      }, 100);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
-    <nav className="bg-blue-900/30 backdrop-blur-md w-full pt-3 pb-2 px-3 xs:px-6 md:px-10 mb-2 fixed top-0 left-0 right-0 z-50 font-mono tracking-wider shadow-md shadow-blue-500/30 transition duration-300">
+    <nav
+      style={{
+        transform: `translateY(${showNavbar ? 0 : "-100%"})`,
+        opacity: showNavbar ? 1 : 0,
+      }}
+      className="bg-blue-900/30 backdrop-blur-md w-full pt-3 pb-2 px-3 xs:px-6 md:px-10 mb-2 fixed top-0 left-0 right-0 z-50 font-mono tracking-wider shadow-md shadow-blue-500/30 transition-all duration-300"
+    >
       <div className="flex flex-col sm:flex-row sm:justify-between mx-auto w-full text-white">
         <div className="flex justify-between items-center">
           <h2 className="text-lg md:text-xl lg:text-2xl font-extrabold">
@@ -21,13 +47,13 @@ function Navbar() {
               xmlns="http://www.w3.org/2000/svg"
               fill="currentColor"
               viewBox="0 0 24 24"
-              stroke-width="1.5"
+              strokeWidth="1.5"
               stroke="currentColor"
-              class="size-6"
+              className="size-6"
             >
               <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
+                strokeLinecap="round"
+                strokeLinejoin="round"
                 d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
               />
             </svg>
