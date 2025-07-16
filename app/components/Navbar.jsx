@@ -32,7 +32,7 @@ function Navbar() {
         transform: `translateY(${showNavbar ? 0 : "-100%"})`,
         opacity: showNavbar ? 1 : 0,
       }}
-      className="bg-blue-900/30 backdrop-blur-md w-full pt-3 pb-2 px-3 xs:px-6 md:px-10 mb-2 fixed top-0 left-0 right-0 z-50 font-mono tracking-wider shadow-md shadow-blue-500/30 transition-all duration-300"
+      className="bg-black/40 backdrop-blur-md w-full pt-3 pb-2 px-3 xs:px-6 md:px-10 mb-2 fixed top-0 left-0 right-0 z-50 font-mono tracking-wider shadow-md shadow-blue-500/30 transition-all duration-300 border-4 border-blue-500/30 "
     >
       <div className="flex flex-col sm:flex-row sm:justify-between mx-auto w-full text-white">
         <div className="flex justify-between items-center">

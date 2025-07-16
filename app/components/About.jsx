@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import Button from "./Button";
 
+
 function About({ id }) {
   const svgRef = useRef(null);
   const svgRef2 = useRef(null);
@@ -47,6 +48,7 @@ function About({ id }) {
     };
   }, []);
   return (
+   
     <section
       id={id}
       style={{ paddingTop: padding }}

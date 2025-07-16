@@ -1,170 +1,142 @@
-import React, { useEffect, useState, useRef } from "react";
-import Logo from "../assets/logo.png";
-import hero from "../assets/hero.jpg";
-import Button from "../components/Button";
+import React, { useEffect, useState, useRef } from 'react';
+import Logo from '../assets/logo.png';
+import hero from '../assets/hero.jpg';
+import Button from '../components/Button';
 import "../app.css";
 
-const Hero = ({ id }) => {
-  const lines = ["GET READY FOR", "AN EXCITING", "CHALLENGE!"];
-  const [displayedText, setDisplayedText] = useState([]);
-  const [lineIndex, setLineIndex] = useState(0);
-  const [charIndex, setCharIndex] = useState(0);
+const Hero = () => {
   const [textAnimationComplete, setTextAnimationComplete] = useState(false);
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [particles, setParticles] = useState([]);
+  const particlesRef = useRef([]);
   const heroRef = useRef(null);
 
   useEffect(() => {
+    setTextAnimationComplete(true);
+  }, []);
+
+  useEffect(() => {
     if (textAnimationComplete && particles.length === 0) {
-      const newParticles = [...Array(100)].map((_, i) => ({
-        id: i,
-        size: Math.random() * 4 + 3,
-        x: Math.random() * 100,
-        y: Math.random() * 100,
-        baseX: Math.random() * 100,
-        baseY: Math.random() * 100,
-        tx: Math.random() * 60 - 30,
-        ty: Math.random() * 60 - 30,
-        duration: Math.random() * 10 + 5,
-        delay: Math.random() * 5,
-        scattered: false,
-        scatterX: 0,
-        scatterY: 0,
-      }));
+      const newParticles = [...Array(100)].map((_, i) => {
+        const baseX = Math.random() * 100;
+        const baseY = Math.random() * 100;
+        return {
+          id: i,
+          size: Math.random() * 2 + 1.5, // smaller for more elegant dust
+          baseX,
+          baseY,
+          x: baseX,
+          y: baseY,
+          scatterX: 0,
+          scatterY: 0,
+          scattered: false,
+          speed: Math.random() * 1 + 0.5,
+          phase: Math.random() * Math.PI * 2,
+        };
+      });
+
       setParticles(newParticles);
+      particlesRef.current = newParticles;
     }
   }, [textAnimationComplete, particles.length]);
 
   useEffect(() => {
-    if (lineIndex < lines.length) {
-      if (charIndex < lines[lineIndex].length) {
-        const timeout = setTimeout(() => {
-          setDisplayedText((prev) => {
-            const currentLine = prev[lineIndex] || "";
-            const updatedLines = [...prev];
-            updatedLines[lineIndex] = currentLine + lines[lineIndex][charIndex];
-            return updatedLines;
-          });
-          setCharIndex((prev) => prev + 1);
-        }, 70);
-        return () => clearTimeout(timeout);
-      } else {
-        const timeout = setTimeout(() => {
-          setLineIndex((prev) => prev + 1);
-          setCharIndex(0);
-        }, 300);
-        return () => clearTimeout(timeout);
-      }
-    } else if (lineIndex >= lines.length && !textAnimationComplete) {
-      setTimeout(() => {
-        setTextAnimationComplete(true);
-      }, 500);
+    let animationFrame;
+    const animate = () => {
+      const time = performance.now() / 1000;
+
+      particlesRef.current = particlesRef.current.map(p => {
+        const floatX = Math.sin(time * p.speed + p.phase) * 3;
+        const floatY = Math.cos(time * p.speed + p.phase) * 3;
+
+        return {
+          ...p,
+          x: p.baseX + p.scatterX + floatX,
+          y: p.baseY + p.scatterY + floatY,
+          opacity: 0.4 + 0.4 * Math.sin(time * p.speed + p.phase), // shimmer
+        };
+      });
+
+      setParticles([...particlesRef.current]);
+      animationFrame = requestAnimationFrame(animate);
+    };
+
+    if (textAnimationComplete) {
+      animationFrame = requestAnimationFrame(animate);
     }
-  }, [charIndex, lineIndex, textAnimationComplete]);
+
+    return () => cancelAnimationFrame(animationFrame);
+  }, [textAnimationComplete]);
 
   useEffect(() => {
     const updateParticlesFromPosition = (x, y) => {
-      setMousePosition({ x, y });
+      particlesRef.current = particlesRef.current.map(p => {
+        const distanceX = p.x - x;
+        const distanceY = p.y - y;
+        const distance = Math.sqrt(distanceX ** 2 + distanceY ** 2);
 
-      setParticles((prevParticles) =>
-        prevParticles.map((particle) => {
-          const distanceX = Math.abs(particle.x - x);
-          const distanceY = Math.abs(particle.y - y);
-          const distance = Math.sqrt(
-            distanceX * distanceX + distanceY * distanceY
-          );
+        if (distance < 12) {
+          const scatterStrength = (12 - distance) * 0.3;
+          const angle = Math.atan2(p.y - y, p.x - x);
+          const scatterX = Math.cos(angle) * scatterStrength;
+          const scatterY = Math.sin(angle) * scatterStrength;
 
-          if (distance < 12) {
-            // Within 12% of screen distance
-            const scatterStrength = (12 - distance) * 0.3; // Reduced multiplier for gentler movement
-            const angle = Math.atan2(particle.y - y, particle.x - x);
-            const scatterX = Math.cos(angle) * scatterStrength;
-            const scatterY = Math.sin(angle) * scatterStrength;
+          return {
+            ...p,
+            scattered: true,
+            scatterX,
+            scatterY,
+          };
+        } else if (p.scattered) {
+          const returnSpeed = 0.05;
+          const newScatterX = p.scatterX * (1 - returnSpeed);
+          const newScatterY = p.scatterY * (1 - returnSpeed);
 
+          if (Math.abs(newScatterX) < 0.05 && Math.abs(newScatterY) < 0.05) {
             return {
-              ...particle,
-              scattered: true,
-              scatterX,
-              scatterY,
-              x: Math.max(0, Math.min(100, particle.baseX + scatterX)),
-              y: Math.max(0, Math.min(100, particle.baseY + scatterY)),
-            };
-          } else if (particle.scattered) {
-            // Gradually return to base position
-            const returnSpeed = 0.05; // Slower return for smoother movement
-            const newScatterX = particle.scatterX * (1 - returnSpeed);
-            const newScatterY = particle.scatterY * (1 - returnSpeed);
-
-            if (Math.abs(newScatterX) < 0.05 && Math.abs(newScatterY) < 0.05) {
-              return {
-                ...particle,
-                scattered: false,
-                scatterX: 0,
-                scatterY: 0,
-                x: particle.baseX,
-                y: particle.baseY,
-              };
-            }
-
-            return {
-              ...particle,
-              scatterX: newScatterX,
-              scatterY: newScatterY,
-              x: Math.max(0, Math.min(100, particle.baseX + newScatterX)),
-              y: Math.max(0, Math.min(100, particle.baseY + newScatterY)),
+              ...p,
+              scattered: false,
+              scatterX: 0,
+              scatterY: 0,
             };
           }
 
-          return particle;
-        })
-      );
+          return {
+            ...p,
+            scatterX: newScatterX,
+            scatterY: newScatterY,
+          };
+        }
+
+        return p;
+      });
     };
 
     const handleMouseMove = (e) => {
       if (!heroRef.current) return;
-
       const rect = heroRef.current.getBoundingClientRect();
       const x = ((e.clientX - rect.left) / rect.width) * 100;
       const y = ((e.clientY - rect.top) / rect.height) * 100;
-
       updateParticlesFromPosition(x, y);
     };
 
-    const handleTouchMove = (e) => {
+    const handleTouch = (e) => {
       if (!heroRef.current) return;
-
       const rect = heroRef.current.getBoundingClientRect();
       const touch = e.touches[0];
       const x = ((touch.clientX - rect.left) / rect.width) * 100;
       const y = ((touch.clientY - rect.top) / rect.height) * 100;
-
       updateParticlesFromPosition(x, y);
     };
 
-    const handleTouchStart = (e) => {
-      if (!heroRef.current) return;
-
-      const rect = heroRef.current.getBoundingClientRect();
-      const touch = e.touches[0];
-      const x = ((touch.clientX - rect.left) / rect.width) * 100;
-      const y = ((touch.clientY - rect.top) / rect.height) * 100;
-
-      updateParticlesFromPosition(x, y);
-    };
-
-    if (textAnimationComplete && heroRef.current) {
-      const element = heroRef.current;
-
-      element.addEventListener("mousemove", handleMouseMove);
-
-      element.addEventListener("touchstart", handleTouchStart);
-      element.addEventListener("touchmove", handleTouchMove);
-
+    const el = heroRef.current;
+    if (textAnimationComplete && el) {
+      el.addEventListener("mousemove", handleMouseMove);
+      el.addEventListener("touchstart", handleTouch);
+      el.addEventListener("touchmove", handleTouch);
       return () => {
-        element.removeEventListener("mousemove", handleMouseMove);
-
-        element.removeEventListener("touchstart", handleTouchStart);
-        element.removeEventListener("touchmove", handleTouchMove);
+        el.removeEventListener("mousemove", handleMouseMove);
+        el.removeEventListener("touchstart", handleTouch);
+        el.removeEventListener("touchmove", handleTouch);
       };
     }
   }, [textAnimationComplete]);
@@ -172,35 +144,31 @@ const Hero = ({ id }) => {
   return (
     <section
       ref={heroRef}
-      className="relative min-h-screen w-full bg-cover bg-center flex flex-col items-center justify-start overflow-hidden scroll-smooth"
+      className="relative min-h-screen w-full bg-cover bg-center flex flex-col items-center justify-start overflow-hidden"
       style={{ backgroundImage: `url(${hero})` }}
-      id={id}
+      id="Hero"
     >
       <div className="absolute inset-0 bg-gradient-to-b from-[#050c1a]/80 via-[#050c1a]/90 to-[#050c1a]/95 z-0" />
 
-      {textAnimationComplete && (
-        <div className="absolute inset-0 overflow-hidden z-5 pointer-events-none">
-          <div className="absolute inset-0 z-40 pointer-events-none">
-            {particles.map((particle) => (
-              <div
-                key={particle.id}
-                className="absolute rounded-full bg-blue-400 transition-all duration-300 ease-out"
-                style={{
-                  width: `${particle.size}px`,
-                  height: `${particle.size}px`,
-                  top: `${particle.y}%`,
-                  left: `${particle.x}%`,
-                  animation: particle.scattered
-                    ? "none"
-                    : `float-random ${particle.duration}s ease-in-out ${particle.delay}s infinite`,
-                  "--tx": particle.tx + "px",
-                  "--ty": particle.ty + "px",
-                  opacity: 0.4,
-                  transform: particle.scattered ? "scale(1.1)" : "scale(1)",
-                }}
-              />
-            ))}
-          </div>
+      {/* Floating Dust Particles */}
+      {textAnimationComplete && particles.length > 0 && (
+        <div className="absolute inset-0 overflow-hidden z-10 pointer-events-none">
+          {particles.map((particle) => (
+            <div
+              key={particle.id}
+              className="absolute rounded-full bg-blue-400"
+              style={{
+                width: `${particle.size}px`,
+                height: `${particle.size}px`,
+                top: `${particle.y}%`,
+                left: `${particle.x}%`,
+                opacity: particle.opacity ?? 0.6,
+                transform: particle.scattered ? 'scale(1.3)' : 'scale(1)',
+                transition: 'transform 0.2s ease-out',
+                boxShadow: '0 0 8px rgba(96, 165, 250, 0.4)',
+              }}
+            />
+          ))}
         </div>
       )}
 
@@ -209,9 +177,7 @@ const Hero = ({ id }) => {
           <div className="bg-black/30 backdrop-blur-sm border border-blue-400/20 rounded-md p-2 animate-pulse">
             <div className="flex items-center space-x-2">
               <div className="w-2 h-2 bg-blue-400 rounded-full animate-ping"></div>
-              <span className="text-blue-400 font-mono text-[10px]">
-                Indulge
-              </span>
+              <span className="text-blue-400 font-mono text-[10px]">Indulge</span>
             </div>
           </div>
         </div>
@@ -219,9 +185,7 @@ const Hero = ({ id }) => {
           <div className="bg-black/30 backdrop-blur-sm border border-cyan-400/20 rounded-md p-2 animate-pulse">
             <div className="flex items-center space-x-2">
               <div className="w-2 h-2 bg-cyan-400 rounded-full animate-ping"></div>
-              <span className="text-cyan-400 font-mono text-[10px]">
-                Invent
-              </span>
+              <span className="text-cyan-400 font-mono text-[10px]">Invent</span>
             </div>
           </div>
         </div>
@@ -229,9 +193,7 @@ const Hero = ({ id }) => {
           <div className="bg-black/30 backdrop-blur-sm border border-blue-300/20 rounded-md p-2 animate-pulse">
             <div className="flex flex-col items-center space-y-1">
               <div className="w-2 h-2 bg-blue-300 rounded-full animate-ping"></div>
-              <span className="text-blue-300 font-mono text-[10px]">
-                Innovate
-              </span>
+              <span className="text-blue-300 font-mono text-[10px]">Innovate</span>
             </div>
           </div>
         </div>
@@ -249,7 +211,7 @@ const Hero = ({ id }) => {
           <div className="relative flex-shrink-0 animate-[fadeIn_1.5s_ease-in-out]">
             <img
               src={Logo}
-              className="h-[25vh] lg:h-[42vh] filter drop-shadow-2xl animate-logo-glow relative z-10"
+              className="h-[45vh] lg:h-[55vh] filter drop-shadow-2xl animate-logo-glow relative z-10"
               alt="Logo"
             />
 
@@ -257,29 +219,10 @@ const Hero = ({ id }) => {
             <div className="absolute inset-0 rounded-full border border-blue-400/30 animate-pulse"></div>
             <div className="absolute -inset-2 rounded-full border border-cyan-400/20 animate-pulse delay-500"></div>
           </div>
-
-          <div className="text-center px-4">
-            <h1 className="text-3xl lg:text-3xl text-white leading-snug font-space min-h-[150px]">
-              {displayedText.map((line, index) => (
-                <div key={index}>
-                  {line === "AN EXCITING" ? (
-                    <>
-                      AN{" "}
-                      <span className="text-blue-400 animate-pulse font-bold">
-                        EXCITING
-                      </span>
-                    </>
-                  ) : (
-                    line
-                  )}
-                </div>
-              ))}
-            </h1>
-          </div>
         </div>
 
         <div className="text-center px-4 animate-[fadeIn_2s_ease-in-out] mt-[-3rem]">
-          <h1 className="text-xl text-blue-400 leading-snug font-space uppercase">
+          <h1 className="text-5xl text-blue-400 leading-snug font-Monoton">
             September 12∘13∘14
           </h1>
         </div>
@@ -296,7 +239,7 @@ const Hero = ({ id }) => {
           <div className="absolute -inset-3 rounded-xl bg-gradient-to-r from-blue-600/20 via-cyan-500/20 to-blue-600/20 blur-lg opacity-60 group-hover:opacity-100 transition duration-500 animate-pulse"></div>
           <div className="relative rounded-lg p-1">
             <div className="backdrop-blur-sm rounded-lg transition duration-300">
-              <Button text="REGISTER NOW" color="rgba(1, 1, 33, 0.063)" />
+              <Button text="REGISTER NOW" color="rgba(17, 17, 17, 0.063)" />
             </div>
           </div>
         </div>
@@ -320,11 +263,7 @@ const Hero = ({ id }) => {
                 strokeWidth="2.5"
                 viewBox="0 0 24 24"
               >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M19 9l-7 7-7-7"
-                />
+                <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
               </svg>
             </div>
           </div>

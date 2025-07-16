@@ -25,8 +25,8 @@ export function meta() {
 export default function Home() {
   return (
     <main className="relative w-full h-full flex flex-col items-center justify-center overflow-visible">
-      <SpotlightCanvas />
       <Hero id="hero" />
+      <SpotlightCanvas />
       <About id="about" />
     </main>
   );
