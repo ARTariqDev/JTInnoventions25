@@ -1,6 +1,11 @@
 import { useRef, useState } from "react";
 
-const Button = ({ text, glowColor = "#3b82f6", onClick, color = "#3b82f6" }) => {
+const Button = ({
+  text,
+  glowColor = "#3b82f6",
+  onClick,
+  color = "#3b82f6",
+}) => {
   const btnRef = useRef(null);
   const [hovered, setHovered] = useState(false);
   const [ripples, setRipples] = useState([]);
@@ -40,9 +45,9 @@ const Button = ({ text, glowColor = "#3b82f6", onClick, color = "#3b82f6" }) => 
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
       onClick={handleClick}
-      className="relative px-6 py-2 rounded-md text-white font-medium overflow-hidden transition duration-150 active:scale-95 border border-white/20 backdrop-blur-md"
+      className="relative px-6 py-2 rounded-md text-white font-medium overflow-hidden transition duration-150 active:scale-95 border border-white/20 backdrop-blur-md "
       style={{
-        backgroundColor: `${color}10`, // ~6% opacity
+        background: `${color}`, // ~6% opacity
       }}
     >
       {/* Hover Glow Border */}
@@ -55,7 +60,7 @@ const Button = ({ text, glowColor = "#3b82f6", onClick, color = "#3b82f6" }) => 
           maskImage: `radial-gradient(120px at var(--x, 0px) var(--y, 0px), white 0%, transparent 70%)`,
           WebkitMaskImage: `radial-gradient(120px at var(--x, 0px) var(--y, 0px), white 0%, transparent 70%)`,
           transition: "mask-position 0.05s linear, opacity 0.3s ease-out",
-          boxShadow: hovered ? `0 0 10px ${glowColor}` : 'none',
+          boxShadow: hovered ? `0 0 10px ${glowColor}` : "none",
         }}
       />
 

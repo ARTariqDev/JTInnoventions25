@@ -1,10 +1,10 @@
-import React, { useEffect, useState, useRef } from 'react';
-import Logo from '../assets/logo.png';
-import hero from '../assets/hero.jpg';
-import Button from '../components/Button';
+import React, { useEffect, useState, useRef } from "react";
+import Logo from "../assets/logo.png";
+import hero from "../assets/hero.jpg";
+import Button from "../components/Button";
 import "../app.css";
 
-const Hero = () => {
+const Hero = ({ id }) => {
   const lines = ["GET READY FOR", "AN EXCITING", "CHALLENGE!"];
   const [displayedText, setDisplayedText] = useState([]);
   const [lineIndex, setLineIndex] = useState(0);
@@ -35,13 +35,12 @@ const Hero = () => {
     }
   }, [textAnimationComplete, particles.length]);
 
-
   useEffect(() => {
     if (lineIndex < lines.length) {
       if (charIndex < lines[lineIndex].length) {
         const timeout = setTimeout(() => {
           setDisplayedText((prev) => {
-            const currentLine = prev[lineIndex] || '';
+            const currentLine = prev[lineIndex] || "";
             const updatedLines = [...prev];
             updatedLines[lineIndex] = currentLine + lines[lineIndex][charIndex];
             return updatedLines;
@@ -57,31 +56,31 @@ const Hero = () => {
         return () => clearTimeout(timeout);
       }
     } else if (lineIndex >= lines.length && !textAnimationComplete) {
-
       setTimeout(() => {
         setTextAnimationComplete(true);
       }, 500);
     }
   }, [charIndex, lineIndex, textAnimationComplete]);
 
-
   useEffect(() => {
     const updateParticlesFromPosition = (x, y) => {
       setMousePosition({ x, y });
 
- 
-      setParticles(prevParticles => 
-        prevParticles.map(particle => {
+      setParticles((prevParticles) =>
+        prevParticles.map((particle) => {
           const distanceX = Math.abs(particle.x - x);
           const distanceY = Math.abs(particle.y - y);
-          const distance = Math.sqrt(distanceX * distanceX + distanceY * distanceY);
-          
-          if (distance < 12) { // Within 12% of screen distance
+          const distance = Math.sqrt(
+            distanceX * distanceX + distanceY * distanceY
+          );
+
+          if (distance < 12) {
+            // Within 12% of screen distance
             const scatterStrength = (12 - distance) * 0.3; // Reduced multiplier for gentler movement
             const angle = Math.atan2(particle.y - y, particle.x - x);
             const scatterX = Math.cos(angle) * scatterStrength;
             const scatterY = Math.sin(angle) * scatterStrength;
-            
+
             return {
               ...particle,
               scattered: true,
@@ -95,7 +94,7 @@ const Hero = () => {
             const returnSpeed = 0.05; // Slower return for smoother movement
             const newScatterX = particle.scatterX * (1 - returnSpeed);
             const newScatterY = particle.scatterY * (1 - returnSpeed);
-            
+
             if (Math.abs(newScatterX) < 0.05 && Math.abs(newScatterY) < 0.05) {
               return {
                 ...particle,
@@ -106,7 +105,7 @@ const Hero = () => {
                 y: particle.baseY,
               };
             }
-            
+
             return {
               ...particle,
               scatterX: newScatterX,
@@ -115,7 +114,7 @@ const Hero = () => {
               y: Math.max(0, Math.min(100, particle.baseY + newScatterY)),
             };
           }
-          
+
           return particle;
         })
       );
@@ -123,53 +122,49 @@ const Hero = () => {
 
     const handleMouseMove = (e) => {
       if (!heroRef.current) return;
-      
+
       const rect = heroRef.current.getBoundingClientRect();
       const x = ((e.clientX - rect.left) / rect.width) * 100;
       const y = ((e.clientY - rect.top) / rect.height) * 100;
-      
+
       updateParticlesFromPosition(x, y);
     };
 
     const handleTouchMove = (e) => {
       if (!heroRef.current) return;
-      
+
       const rect = heroRef.current.getBoundingClientRect();
       const touch = e.touches[0];
       const x = ((touch.clientX - rect.left) / rect.width) * 100;
       const y = ((touch.clientY - rect.top) / rect.height) * 100;
-      
+
       updateParticlesFromPosition(x, y);
     };
 
     const handleTouchStart = (e) => {
       if (!heroRef.current) return;
-      
+
       const rect = heroRef.current.getBoundingClientRect();
       const touch = e.touches[0];
       const x = ((touch.clientX - rect.left) / rect.width) * 100;
       const y = ((touch.clientY - rect.top) / rect.height) * 100;
-      
+
       updateParticlesFromPosition(x, y);
     };
 
     if (textAnimationComplete && heroRef.current) {
       const element = heroRef.current;
-      
 
-      element.addEventListener('mousemove', handleMouseMove);
-      
+      element.addEventListener("mousemove", handleMouseMove);
 
-      element.addEventListener('touchstart', handleTouchStart);
-      element.addEventListener('touchmove', handleTouchMove);
-      
+      element.addEventListener("touchstart", handleTouchStart);
+      element.addEventListener("touchmove", handleTouchMove);
+
       return () => {
+        element.removeEventListener("mousemove", handleMouseMove);
 
-        element.removeEventListener('mousemove', handleMouseMove);
-        
-
-        element.removeEventListener('touchstart', handleTouchStart);
-        element.removeEventListener('touchmove', handleTouchMove);
+        element.removeEventListener("touchstart", handleTouchStart);
+        element.removeEventListener("touchmove", handleTouchMove);
       };
     }
   }, [textAnimationComplete]);
@@ -179,10 +174,9 @@ const Hero = () => {
       ref={heroRef}
       className="relative min-h-screen w-full bg-cover bg-center flex flex-col items-center justify-start overflow-hidden scroll-smooth"
       style={{ backgroundImage: `url(${hero})` }}
-      id="Hero"
+      id={id}
     >
       <div className="absolute inset-0 bg-gradient-to-b from-[#050c1a]/80 via-[#050c1a]/90 to-[#050c1a]/95 z-0" />
-
 
       {textAnimationComplete && (
         <div className="absolute inset-0 overflow-hidden z-5 pointer-events-none">
@@ -197,12 +191,12 @@ const Hero = () => {
                   top: `${particle.y}%`,
                   left: `${particle.x}%`,
                   animation: particle.scattered
-                    ? 'none'
+                    ? "none"
                     : `float-random ${particle.duration}s ease-in-out ${particle.delay}s infinite`,
                   "--tx": particle.tx + "px",
                   "--ty": particle.ty + "px",
                   opacity: 0.4,
-                  transform: particle.scattered ? 'scale(1.1)' : 'scale(1)',
+                  transform: particle.scattered ? "scale(1.1)" : "scale(1)",
                 }}
               />
             ))}
@@ -210,13 +204,14 @@ const Hero = () => {
         </div>
       )}
 
-
       <div className="absolute inset-0 overflow-hidden z-5 pointer-events-none">
         <div className="absolute top-20 right-4 animate-[fadeIn_2s_ease-in-out]">
           <div className="bg-black/30 backdrop-blur-sm border border-blue-400/20 rounded-md p-2 animate-pulse">
             <div className="flex items-center space-x-2">
               <div className="w-2 h-2 bg-blue-400 rounded-full animate-ping"></div>
-              <span className="text-blue-400 font-mono text-[10px]">Indulge</span>
+              <span className="text-blue-400 font-mono text-[10px]">
+                Indulge
+              </span>
             </div>
           </div>
         </div>
@@ -224,7 +219,9 @@ const Hero = () => {
           <div className="bg-black/30 backdrop-blur-sm border border-cyan-400/20 rounded-md p-2 animate-pulse">
             <div className="flex items-center space-x-2">
               <div className="w-2 h-2 bg-cyan-400 rounded-full animate-ping"></div>
-              <span className="text-cyan-400 font-mono text-[10px]">Invent</span>
+              <span className="text-cyan-400 font-mono text-[10px]">
+                Invent
+              </span>
             </div>
           </div>
         </div>
@@ -232,13 +229,14 @@ const Hero = () => {
           <div className="bg-black/30 backdrop-blur-sm border border-blue-300/20 rounded-md p-2 animate-pulse">
             <div className="flex flex-col items-center space-y-1">
               <div className="w-2 h-2 bg-blue-300 rounded-full animate-ping"></div>
-              <span className="text-blue-300 font-mono text-[10px]">Innovate</span>
+              <span className="text-blue-300 font-mono text-[10px]">
+                Innovate
+              </span>
             </div>
           </div>
         </div>
       </div>
 
-      
       <div className="absolute inset-0 z-5 opacity-10 pointer-events-none">
         <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-blue-400 to-transparent animate-pulse"></div>
         <div className="absolute top-1/4 left-0 w-full h-0.5 bg-gradient-to-r from-transparent via-cyan-400 to-transparent animate-pulse delay-700"></div>
@@ -246,7 +244,6 @@ const Hero = () => {
         <div className="absolute top-3/4 left-0 w-full h-0.5 bg-gradient-to-r from-transparent via-blue-500 to-transparent animate-pulse delay-300"></div>
       </div>
 
-    
       <div className="relative z-10 flex flex-col items-center justify-center text-center px-4 max-w-7xl mx-auto w-full pt-20 pb-10">
         <div className="flex flex-col items-center justify-center gap-6 mb-8 animate-[fadeIn_1s_ease-in-out]">
           <div className="relative flex-shrink-0 animate-[fadeIn_1.5s_ease-in-out]">
@@ -261,14 +258,16 @@ const Hero = () => {
             <div className="absolute -inset-2 rounded-full border border-cyan-400/20 animate-pulse delay-500"></div>
           </div>
 
-  
           <div className="text-center px-4">
             <h1 className="text-3xl lg:text-3xl text-white leading-snug font-space min-h-[150px]">
               {displayedText.map((line, index) => (
                 <div key={index}>
                   {line === "AN EXCITING" ? (
                     <>
-                      AN <span className="text-blue-400 animate-pulse font-bold">EXCITING</span>
+                      AN{" "}
+                      <span className="text-blue-400 animate-pulse font-bold">
+                        EXCITING
+                      </span>
                     </>
                   ) : (
                     line
@@ -279,14 +278,12 @@ const Hero = () => {
           </div>
         </div>
 
-   
         <div className="text-center px-4 animate-[fadeIn_2s_ease-in-out] mt-[-3rem]">
-          <h1 className="text-xl text-blue-400 leading-snug font-space">
+          <h1 className="text-xl text-blue-400 leading-snug font-space uppercase">
             September 12∘13∘14
           </h1>
         </div>
       </div>
-
 
       <div className="relative mb-2 animate-[fadeIn_2.5s_ease-in-out] mt-[-1rem]">
         <div className="w-32 h-1 bg-gradient-to-r from-transparent via-white to-transparent opacity-60 animate-pulse"></div>
@@ -294,25 +291,22 @@ const Hero = () => {
         <div className="absolute -top-1 right-0 w-4 h-3 bg-blue-400 opacity-60 animate-pulse delay-500"></div>
       </div>
 
-
       <div className="w-full flex justify-center z-20 mb-6 animate-[fadeIn_3s_ease-in-out]">
         <div className="relative group">
           <div className="absolute -inset-3 rounded-xl bg-gradient-to-r from-blue-600/20 via-cyan-500/20 to-blue-600/20 blur-lg opacity-60 group-hover:opacity-100 transition duration-500 animate-pulse"></div>
           <div className="relative rounded-lg p-1">
             <div className="backdrop-blur-sm rounded-lg transition duration-300">
-              <Button text="REGISTER NOW" color="#010121" />
+              <Button text="REGISTER NOW" color="rgba(1, 1, 33, 0.063)" />
             </div>
           </div>
         </div>
       </div>
-
 
       <div className="relative mb-1 animate-[fadeIn_2.5s_ease-in-out]">
         <div className="w-32 h-1 bg-gradient-to-r from-transparent via-white to-transparent opacity-60 animate-pulse"></div>
         <div className="absolute -top-1 left-0 w-4 h-3 bg-blue-400 opacity-60 animate-pulse"></div>
         <div className="absolute -top-1 right-0 w-4 h-3 bg-blue-400 opacity-60 animate-pulse delay-500"></div>
       </div>
-
 
       <div className="relative z-20 mt-2 animate-[fadeIn_3.5s_ease-in-out] px-4">
         <div className="mx-auto max-w-xs sm:max-w-sm md:max-w-md">
@@ -326,13 +320,16 @@ const Hero = () => {
                 strokeWidth="2.5"
                 viewBox="0 0 24 24"
               >
-                <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M19 9l-7 7-7-7"
+                />
               </svg>
             </div>
           </div>
         </div>
       </div>
-
 
       <div className="absolute top-16 left-8 w-16 h-16 border-t-2 border-l-2 border-blue-400/30 animate-pulse"></div>
       <div className="absolute top-16 right-8 w-16 h-16 border-t-2 border-r-2 border-blue-400/30 animate-pulse delay-300"></div>

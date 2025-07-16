@@ -39,7 +39,7 @@ const SpotlightCanvas = () => {
   return (
     <canvas
       ref={canvasRef}
-      className="absolute top-0 left-0 w-full h-full pointer-events-none z-[9999]"
+      className="absolute top-0 left-0 w-full h-screen pointer-events-none z-[49]" //z-index of navbar is 50
     />
   );
 };

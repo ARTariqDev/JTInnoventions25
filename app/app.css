@@ -1,15 +1,16 @@
-@import url('https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap");
 @import "tailwindcss";
 
 @theme {
-  --color-primary: #141514;
+  --color-primary: #111;
   --color-secondary: #1b76ff;
   --font-poppins: "Poppins", Arial, sans-serif;
   --font-roboto: "Roboto", Arial, sans-serif;
-  --font-space: 'Monaspace Neon', monospace;
+  --font-space: "Monaspace Neon", monospace;
+  --font-open-sans: "Open Sans", sans-serif;
+  --font-monaspace: "Monaspace Neon", monospace;
   --breakpoint-xs: 30rem; /* 480px*/
 }
-
 
 .space-mono-regular {
   font-family: "Space Mono", monospace;
@@ -37,17 +38,18 @@
   --breakpoint-xs: 30rem; /* 480px*/
 }
 
-nav li {
+nav li a {
+  display: inline-block;
   transition: all 0.3s ease-out;
 }
 
-nav li:hover,
-nav li:active {
+nav li a:hover,
+nav li a:active {
   color: #fff;
 }
 
 nav li:not(:last-child) {
-  border-bottom: 1px solid #232830;
+  border-bottom: 1px solid #10346e;
   width: 100%;
   text-align: center;
 }
@@ -69,7 +71,6 @@ nav li:not(:last-child) {
   }
 }
 
-
 @keyframes logoGlow {
   0% {
     filter: drop-shadow(0 0 10px #1b76ff88);
@@ -81,7 +82,6 @@ nav li:not(:last-child) {
     filter: drop-shadow(0 0 10px #1b76ff88);
   }
 }
-
 
 @keyframes hero-glow {
   0% {
@@ -95,9 +95,9 @@ nav li:not(:last-child) {
   }
 }
 
-
 @keyframes float-1 {
-  0%, 100% {
+  0%,
+  100% {
     transform: translate(20vw, 20vh) scale(1);
   }
   25% {
@@ -112,7 +112,8 @@ nav li:not(:last-child) {
 }
 
 @keyframes float-2 {
-  0%, 100% {
+  0%,
+  100% {
     transform: translate(70vw, 40vh) scale(1);
   }
   25% {
@@ -127,7 +128,8 @@ nav li:not(:last-child) {
 }
 
 @keyframes float-3 {
-  0%, 100% {
+  0%,
+  100% {
     transform: translate(40vw, 60vh) scale(1);
   }
   25% {
@@ -142,7 +144,8 @@ nav li:not(:last-child) {
 }
 
 @keyframes float-4 {
-  0%, 100% {
+  0%,
+  100% {
     transform: translate(80vw, 70vh) scale(1);
   }
   25% {
@@ -152,12 +155,13 @@ nav li:not(:last-child) {
     transform: translate(75vw, 15vh) scale(1.4);
   }
   75% {
-    transform: translate(35vw, 65vh) scale(1.0);
+    transform: translate(35vw, 65vh) scale(1);
   }
 }
 
 @keyframes float-5 {
-  0%, 100% {
+  0%,
+  100% {
     transform: translate(50vw, 30vh) scale(1);
   }
   25% {
@@ -172,7 +176,8 @@ nav li:not(:last-child) {
 }
 
 @keyframes float-6 {
-  0%, 100% {
+  0%,
+  100% {
     transform: translate(25vw, 80vh) scale(1);
   }
   25% {
@@ -187,7 +192,8 @@ nav li:not(:last-child) {
 }
 
 @keyframes float-7 {
-  0%, 100% {
+  0%,
+  100% {
     transform: translate(60vw, 25vh) scale(1);
   }
   25% {
@@ -202,7 +208,8 @@ nav li:not(:last-child) {
 }
 
 @keyframes float-8 {
-  0%, 100% {
+  0%,
+  100% {
     transform: translate(90vw, 55vh) scale(1);
   }
   25% {
@@ -212,10 +219,9 @@ nav li:not(:last-child) {
     transform: translate(55vw, 85vh) scale(1.4);
   }
   75% {
-    transform: translate(75vw, 45vh) scale(1.0);
+    transform: translate(75vw, 45vh) scale(1);
   }
 }
-
 
 @keyframes fadeIn {
   0% {
@@ -241,7 +247,11 @@ nav li:not(:last-child) {
 }
 
 .animate-fade-in {
-  animation: fadeIn 1s ease-in-out;
+  animation: fadeIn 1s ease-in-out forwards;
+}
+
+.animate-heading-glow {
+  animation: heading-glow 2.5s ease-in-out infinite alternate;
 }
 
 /* Floating Animations */
@@ -260,15 +270,23 @@ nav li:not(:last-child) {
   }
 }
 
-
 @keyframes typewriter {
-  from { width: 0 }
-  to { width: 100% }
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
 }
 
 @keyframes blink {
-  0%, 100% { border-color: transparent }
-  50% { border-color: white }
+  0%,
+  100% {
+    border-color: transparent;
+  }
+  50% {
+    border-color: white;
+  }
 }
 
 .typewriter {
@@ -278,13 +296,11 @@ nav li:not(:last-child) {
   border-right: 2px solid white;
 }
 
-
-
 #spotlight {
   transition: background 0.1s ease-out;
   mix-blend-mode: screen;
 }
 
-#html {
+html {
   scroll-behavior: smooth;
 }

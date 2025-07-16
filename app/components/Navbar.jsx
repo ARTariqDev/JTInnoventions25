@@ -64,20 +64,30 @@ function Navbar() {
           className={`font-medium cursor-pointer overflow-hidden mt-0.5 text-sm md:text-base flex flex-col sm:flex-row justify-center items-center text-gray-400 sm:opacity-100 sm:max-h-none uppercase transform-all duration-800 ease-in-out 
             ${isOpen ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"}`}
         >
-          <li className="py-1 sm:px-2 md:px-3">
-            <Link href="#Hero">Home</Link>
+          <li>
+            <Link className="py-1 sm:px-2 md:px-3" to="/#hero">
+              Home
+            </Link>
           </li>
-          <li className="py-1 sm:px-2 md:px-3">
-            <Link href="">About</Link>
+          <li>
+            <Link className="py-1 sm:px-2 md:px-3" to="/#about">
+              About
+            </Link>
           </li>
-          <li className="py-1 sm:px-2 md:px-3">
-            <Link href="">Categories</Link>
+          <li>
+            <Link className="py-1 sm:px-2 md:px-3" href="">
+              Categories
+            </Link>
           </li>
-          <li className="py-1 sm:px-2 md:px-3">
-            <Link href="">Register</Link>
+          <li>
+            <Link className="py-1 sm:px-2 md:px-3" href="">
+              Register
+            </Link>
           </li>
-          <li className="pt-1 sm:px-2 sm:py-1 md:pl-3">
-            <Link href="">Contact</Link>
+          <li>
+            <Link className="pt-1 sm:px-2 sm:py-1 md:pl-3" href="">
+              Contact
+            </Link>
           </li>
         </ul>
       </div>
