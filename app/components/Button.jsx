@@ -47,10 +47,10 @@ const Button = ({
       onClick={handleClick}
       className="relative px-6 py-2 rounded-md text-white font-medium overflow-hidden transition duration-150 active:scale-95 border border-white/20 backdrop-blur-md "
       style={{
-        background: `${color}`, // ~6% opacity
+        background: `${color}`,
       }}
     >
-      {/* Hover Glow Border */}
+
       <span
         className="absolute inset-0 pointer-events-none rounded-md border z-10 transition-opacity duration-300 ease-out"
         style={{
@@ -64,7 +64,7 @@ const Button = ({
         }}
       />
 
-      {/* Ripple */}
+
       {ripples.map((ripple) => (
         <span
           key={ripple.id}

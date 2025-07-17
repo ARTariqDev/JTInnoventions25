@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
 import Logo from '../assets/logo.png';
-import hero from '../assets/hero.jpg';
 import Button from '../components/Button';
 import "../app.css";
 
@@ -21,7 +20,7 @@ const Hero = () => {
         const baseY = Math.random() * 100;
         return {
           id: i,
-          size: Math.random() * 2 + 1.5, // smaller for more elegant dust
+          size: Math.random() * 2 + 1.5,
           baseX,
           baseY,
           x: baseX,
@@ -52,7 +51,7 @@ const Hero = () => {
           ...p,
           x: p.baseX + p.scatterX + floatX,
           y: p.baseY + p.scatterY + floatY,
-          opacity: 0.4 + 0.4 * Math.sin(time * p.speed + p.phase), // shimmer
+          opacity: 0.4 + 0.4 * Math.sin(time * p.speed + p.phase),
         };
       });
 
@@ -144,13 +143,12 @@ const Hero = () => {
   return (
     <section
       ref={heroRef}
-      className="relative min-h-screen w-full bg-cover bg-center flex flex-col items-center justify-start overflow-hidden"
-      style={{ backgroundImage: `url(${hero})` }}
+      className="relative min-h-screen w-full flex flex-col items-center justify-start overflow-hidden"
       id="Hero"
     >
-      <div className="absolute inset-0 bg-gradient-to-b from-[#050c1a]/80 via-[#050c1a]/90 to-[#050c1a]/95 z-0" />
 
-      {/* Floating Dust Particles */}
+
+
       {textAnimationComplete && particles.length > 0 && (
         <div className="absolute inset-0 overflow-hidden z-10 pointer-events-none">
           {particles.map((particle) => (
@@ -171,6 +169,7 @@ const Hero = () => {
           ))}
         </div>
       )}
+
 
       <div className="absolute inset-0 overflow-hidden z-5 pointer-events-none">
         <div className="absolute top-20 right-4 animate-[fadeIn_2s_ease-in-out]">
@@ -270,8 +269,8 @@ const Hero = () => {
         </div>
       </div>
 
-      <div className="absolute top-16 left-8 w-16 h-16 border-t-2 border-l-2 border-blue-400/30 animate-pulse"></div>
-      <div className="absolute top-16 right-8 w-16 h-16 border-t-2 border-r-2 border-blue-400/30 animate-pulse delay-300"></div>
+      <div className="absolute top-20 left-8 w-16 h-16 border-t-2 border-l-2 border-blue-400/30 animate-pulse"></div>
+      <div className="absolute top-20 right-8 w-16 h-16 border-t-2 border-r-2 border-blue-400/30 animate-pulse delay-300"></div>
       <div className="absolute bottom-8 left-8 w-16 h-16 border-b-2 border-l-2 border-blue-400/30 animate-pulse delay-600"></div>
       <div className="absolute bottom-8 right-8 w-16 h-16 border-b-2 border-r-2 border-blue-400/30 animate-pulse delay-900"></div>
     </section>
