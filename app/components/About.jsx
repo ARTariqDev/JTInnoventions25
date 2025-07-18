@@ -51,9 +51,8 @@ function About({ id }) {
     <section
       id={id}
       style={{ paddingTop: padding }}
-      className="relative overflow-hidden pb-12 md:pb-15 px-4 xs:px-8 md:px-15 w-full text-center text-slate-300"
+      className="relative overflow-hidden pb-8 sm:pb-10 md:pb-12 lg:pb-14 px-4 xs:px-8 md:px-15 w-full text-center text-slate-300"
     >
-
       <div className="absolute w-full left-0 top-0 lg:-top-5 xl:-top-16 z-5">
         <svg
           viewBox="0 0 1440 320"
@@ -129,7 +128,7 @@ function About({ id }) {
         >
           What is innoventions?
         </h1>
-        <p className="my-5 sm:my-6 font-open-sans font-semibold md:font-medium tracking-wide text-sm/relaxed md:text-base lg:text-[17px]">
+        <p className="my-7 sm:my-8 font-open-sans font-semibold md:font-medium tracking-wide text-sm/relaxed md:text-base lg:text-[17px]">
           Innoventions'25 is a 3-day Science Olympiad organized by LGS JT,
           showcasing categories spanning Science, Mathematics, IT, Robotics,
           Astronomy and more. The event is designed to engage students from all

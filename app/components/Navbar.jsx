@@ -65,27 +65,27 @@ function Navbar() {
             ${isOpen ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"}`}
         >
           <li>
-            <Link className="py-1 sm:px-2 md:px-3" to="/#hero">
+            <Link className="py-1 px-2 md:px-3" to="/#hero">
               Home
             </Link>
           </li>
           <li>
-            <Link className="py-1 sm:px-2 md:px-3" to="/#about">
+            <Link className="py-1 px-2 md:px-3" to="/#about">
               About
             </Link>
           </li>
           <li>
-            <Link className="py-1 sm:px-2 md:px-3" href="">
+            <Link className="py-1 px-2 md:px-3" href="">
               Categories
             </Link>
           </li>
           <li>
-            <Link className="py-1 sm:px-2 md:px-3" href="">
+            <Link className="py-1 px-2 md:px-3" href="">
               Register
             </Link>
           </li>
           <li>
-            <Link className="pt-1 sm:px-2 sm:py-1 md:pl-3" href="">
+            <Link className="pt-1 px-2 sm:py-1 md:pl-3" to="/#contact">
               Contact
             </Link>
           </li>

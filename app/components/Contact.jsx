@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from "react";
 
 function Contact() {
   const ref = useRef(null);
@@ -7,19 +7,19 @@ function Contact() {
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => setVisible(entry.isIntersecting),
-      { threshold: 0.1 }
+      { threshold: [0.1, 0.4] }
     );
 
     if (ref.current) observer.observe(ref.current);
-    return () => observer.disconnect();
+    return () => observer.unobserve(ref.current);
   }, []);
 
   return (
     <div
-      id="Contact"
+      id="contact"
       ref={ref}
-      className={`relative w-full px-4 xs:px-8 md:px-15 py-12 md:py-15 overflow-hidden transition-all duration-1000 ease-out text-center ${
-        visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+      className={`relative w-full px-4 xs:px-8 md:px-15 py-8 sm:py-10 md:py-12 lg:py-14 overflow-hidden transition-all duration-1000 ease-out text-center ${
+        visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
       }`}
     >
       <div className="relative z-10 max-w-320 mx-auto">
@@ -29,14 +29,17 @@ function Contact() {
           </h1>
         </div>
 
-
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-12 animate-[fadeIn_1.5s_ease-in-out]">
           <div className="relative group">
             <div className="absolute -inset-3 rounded-xl bg-gradient-to-r from-blue-600/20 via-cyan-500/20 to-blue-600/20 blur-lg opacity-60 group-hover:opacity-100 transition duration-500 animate-pulse"></div>
             <div className="relative bg-black/70 backdrop-blur-sm border border-blue-400/25 p-6 rounded-lg text-slate-300 shadow-2xl shadow-blue-500/10 hover:shadow-blue-500/30 transition-all duration-300 hover:transform hover:scale-105 hover:bg-black/80">
               <div className="absolute top-2 right-2 w-2 h-2 bg-blue-400 rounded-full animate-ping"></div>
-              <h2 className="text-xl font-semibold mb-2 text-blue-300 font-monaspace">Haaris Usman Saeed</h2>
-              <h3 className="text-sm mb-3 text-cyan-300 font-open-sans font-medium">Event Head</h3>
+              <h2 className="text-xl font-semibold mb-2 text-blue-300 font-monaspace">
+                Haaris Usman Saeed
+              </h2>
+              <h3 className="text-sm mb-3 text-cyan-300 font-open-sans font-medium">
+                Event Head
+              </h3>
               <p className="text-sm mb-1 flex items-center font-open-sans">
                 <span className="w-1 h-1 bg-blue-400 rounded-full mr-2"></span>
                 +92 316 4699448
@@ -52,8 +55,12 @@ function Contact() {
             <div className="absolute -inset-3 rounded-xl bg-gradient-to-r from-cyan-600/20 via-blue-500/20 to-cyan-600/20 blur-lg opacity-60 group-hover:opacity-100 transition duration-500 animate-pulse"></div>
             <div className="relative bg-black/70 backdrop-blur-sm border border-cyan-400/25 p-6 rounded-lg text-slate-300 shadow-2xl shadow-cyan-500/10 hover:shadow-cyan-500/30 transition-all duration-300 hover:transform hover:scale-105 hover:bg-black/80">
               <div className="absolute top-2 right-2 w-2 h-2 bg-cyan-400 rounded-full animate-ping"></div>
-              <h2 className="text-xl font-semibold mb-2 text-cyan-300 font-monaspace">Adil Ali Azfar</h2>
-              <h3 className="text-sm mb-3 text-blue-300 font-open-sans font-medium">Event Head</h3>
+              <h2 className="text-xl font-semibold mb-2 text-cyan-300 font-monaspace">
+                Adil Ali Azfar
+              </h2>
+              <h3 className="text-sm mb-3 text-blue-300 font-open-sans font-medium">
+                Event Head
+              </h3>
               <p className="text-sm mb-1 flex items-center font-open-sans">
                 <span className="w-1 h-1 bg-cyan-400 rounded-full mr-2"></span>
                 +92 310 0853171
@@ -83,7 +90,6 @@ function Contact() {
           </div>
         </div>
 
-
         <div className="text-center mb-8 animate-[fadeIn_2.5s_ease-in-out]">
           <h2 className="text-lg font-semibold text-blue-300 mb-2 font-monaspace">
             Location
@@ -92,7 +98,6 @@ function Contact() {
             364-E/1, M. A. Block E 1 Phase 1 Johar Town, Lahore, Punjab 54700
           </p>
         </div>
-
 
         <div className="flex justify-center space-x-12 animate-[fadeIn_3s_ease-in-out]">
           <a

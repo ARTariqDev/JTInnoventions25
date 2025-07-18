@@ -4,7 +4,7 @@ import SpotlightCanvas from "../components/SpotlightCanvas";
 import About from "../components/About";
 import Contact from "../components/Contact";
 import Logo from "../assets/logo.png";
-import herobg from "../assets/hero.jpg"
+import herobg from "../assets/hero.jpg";
 import "@fontsource/poppins";
 import "@fontsource/poppins/500.css";
 import "@fontsource/poppins/600.css";
@@ -27,7 +27,7 @@ export function meta() {
 export default function Home() {
   return (
     <main className="relative w-full h-full flex flex-col items-center justify-center overflow-visible">
-      <SpotlightCanvas/>
+      <SpotlightCanvas />
       <div
         className="fixed inset-0 w-full h-full bg-cover bg-center z-[-2]"
         style={{

@@ -1,6 +1,6 @@
-import React, { useEffect, useState, useRef } from 'react';
-import Logo from '../assets/logo.png';
-import Button from '../components/Button';
+import React, { useEffect, useState, useRef } from "react";
+import Logo from "../assets/logo.png";
+import Button from "../components/Button";
 import "../app.css";
 
 const Hero = () => {
@@ -43,7 +43,7 @@ const Hero = () => {
     const animate = () => {
       const time = performance.now() / 1000;
 
-      particlesRef.current = particlesRef.current.map(p => {
+      particlesRef.current = particlesRef.current.map((p) => {
         const floatX = Math.sin(time * p.speed + p.phase) * 3;
         const floatY = Math.cos(time * p.speed + p.phase) * 3;
 
@@ -68,7 +68,7 @@ const Hero = () => {
 
   useEffect(() => {
     const updateParticlesFromPosition = (x, y) => {
-      particlesRef.current = particlesRef.current.map(p => {
+      particlesRef.current = particlesRef.current.map((p) => {
         const distanceX = p.x - x;
         const distanceY = p.y - y;
         const distance = Math.sqrt(distanceX ** 2 + distanceY ** 2);
@@ -143,12 +143,9 @@ const Hero = () => {
   return (
     <section
       ref={heroRef}
-      className="relative min-h-screen w-full flex flex-col items-center justify-start overflow-hidden"
+      className="relative min-h-screen w-full flex flex-col items-center justify-start overflow-hidden pb-5 md:pb-8"
       id="Hero"
     >
-
-
-
       {textAnimationComplete && particles.length > 0 && (
         <div className="absolute inset-0 overflow-hidden z-10 pointer-events-none">
           {particles.map((particle) => (
@@ -161,22 +158,23 @@ const Hero = () => {
                 top: `${particle.y}%`,
                 left: `${particle.x}%`,
                 opacity: particle.opacity ?? 0.6,
-                transform: particle.scattered ? 'scale(1.3)' : 'scale(1)',
-                transition: 'transform 0.2s ease-out',
-                boxShadow: '0 0 8px rgba(96, 165, 250, 0.4)',
+                transform: particle.scattered ? "scale(1.3)" : "scale(1)",
+                transition: "transform 0.2s ease-out",
+                boxShadow: "0 0 8px rgba(96, 165, 250, 0.4)",
               }}
             />
           ))}
         </div>
       )}
 
-
       <div className="absolute inset-0 overflow-hidden z-5 pointer-events-none">
         <div className="absolute top-20 right-4 animate-[fadeIn_2s_ease-in-out]">
           <div className="bg-black/30 backdrop-blur-sm border border-blue-400/20 rounded-md p-2 animate-pulse">
             <div className="flex items-center space-x-2">
               <div className="w-2 h-2 bg-blue-400 rounded-full animate-ping"></div>
-              <span className="text-blue-400 font-mono text-[10px]">Indulge</span>
+              <span className="text-blue-400 font-mono text-[10px]">
+                Indulge
+              </span>
             </div>
           </div>
         </div>
@@ -184,7 +182,9 @@ const Hero = () => {
           <div className="bg-black/30 backdrop-blur-sm border border-cyan-400/20 rounded-md p-2 animate-pulse">
             <div className="flex items-center space-x-2">
               <div className="w-2 h-2 bg-cyan-400 rounded-full animate-ping"></div>
-              <span className="text-cyan-400 font-mono text-[10px]">Invent</span>
+              <span className="text-cyan-400 font-mono text-[10px]">
+                Invent
+              </span>
             </div>
           </div>
         </div>
@@ -192,7 +192,9 @@ const Hero = () => {
           <div className="bg-black/30 backdrop-blur-sm border border-blue-300/20 rounded-md p-2 animate-pulse">
             <div className="flex flex-col items-center space-y-1">
               <div className="w-2 h-2 bg-blue-300 rounded-full animate-ping"></div>
-              <span className="text-blue-300 font-mono text-[10px]">Innovate</span>
+              <span className="text-blue-300 font-mono text-[10px]">
+                Innovate
+              </span>
             </div>
           </div>
         </div>
@@ -262,7 +264,11 @@ const Hero = () => {
                 strokeWidth="2.5"
                 viewBox="0 0 24 24"
               >
-                <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M19 9l-7 7-7-7"
+                />
               </svg>
             </div>
           </div>
