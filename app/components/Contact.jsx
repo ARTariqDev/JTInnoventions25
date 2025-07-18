@@ -41,11 +41,17 @@ function Contact() {
                 Event Head
               </h3>
               <p className="text-sm mb-1 flex items-center font-open-sans">
-                <span className="w-1 h-1 bg-blue-400 rounded-full mr-2"></span>
+                {/* <span className="w-1 h-1 bg-blue-400 rounded-full mr-2"></span> */}
+                <span className="mr-2 text-red-500">
+                  <i className="fas fa-phone"></i>
+                </span>
                 +92 316 4699448
               </p>
               <p className="text-sm break-words flex items-center font-open-sans">
-                <span className="w-1 h-1 bg-blue-400 rounded-full mr-2"></span>
+                {/* <span className="w-1 h-1 bg-blue-400 rounded-full mr-2"></span> */}
+                <span className="mr-2 text-red-500">
+                  <i className="fas fa-envelope"></i>
+                </span>
                 haarisusman20@gmail.com
               </p>
             </div>
@@ -62,11 +68,17 @@ function Contact() {
                 Event Head
               </h3>
               <p className="text-sm mb-1 flex items-center font-open-sans">
-                <span className="w-1 h-1 bg-cyan-400 rounded-full mr-2"></span>
+                {/* <span className="w-1 h-1 bg-cyan-400 rounded-full mr-2"></span> */}
+                <span className="mr-2 text-red-500">
+                  <i className="fas fa-phone"></i>
+                </span>
                 +92 310 0853171
               </p>
               <p className="text-sm break-words flex items-center font-open-sans">
-                <span className="w-1 h-1 bg-cyan-400 rounded-full mr-2"></span>
+                {/* <span className="w-1 h-1 bg-cyan-400 rounded-full mr-2"></span> */}
+                <span className="mr-2 text-red-500">
+                  <i className="fas fa-envelope"></i>
+                </span>
                 adilaliazfar@gmail.com
               </p>
             </div>
