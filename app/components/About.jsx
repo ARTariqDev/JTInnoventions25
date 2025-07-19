@@ -126,7 +126,7 @@ function About({ id }) {
           ref={headingRef}
           className="font-monaspace text-3xl xs:text-4xl md:text-5xl lg:text-6xl xl:text-7xl tracking-wide font-semibold capitalize text-slate-50"
         >
-          What is innoventions?
+          WHAT IS INNOVENTIONS?
         </h1>
         <p className="my-7 sm:my-8 font-open-sans font-semibold md:font-medium tracking-wide text-sm/relaxed md:text-base lg:text-[17px]">
           Innoventions'25 is a 3-day Science Olympiad organized by LGS JT,

@@ -13,6 +13,10 @@
   --breakpoint-xs: 30rem; /* 480px*/
 }
 
+* {
+  font-family:monospace; /* temporarily applied might fix later */
+}
+
 .monoton-regular {
   font-family: "Monoton", sans-serif;
   font-weight: 400;

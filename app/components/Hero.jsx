@@ -222,9 +222,9 @@ const Hero = () => {
           </div>
         </div>
 
-        <div className="text-center px-4 animate-[fadeIn_2s_ease-in-out] mt-[-3rem]">
-          <h1 className="text-5xl text-blue-400 leading-snug font-Monoton">
-            September 12∘13∘14
+        <div className="text-center px-4 animate-[fadeIn_2s_ease-in-out] mt-[-5rem] mb-[2.5rem]">
+          <h1 className="text-6xl text-blue-400 leading-snug font-Monoton">
+            September <br/>12∘13∘14
           </h1>
         </div>
       </div>

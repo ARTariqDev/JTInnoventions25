@@ -1,0 +1,12 @@
+{
+  "expo": {
+    "extra": {
+      "eas": {
+        "projectId": "1a88926c-9dbd-4c7f-9457-f4189f78e956"
+      }
+    },
+    "android": {
+      "package": "com.artariqdev.innoventions25"
+    }
+  }
+}
