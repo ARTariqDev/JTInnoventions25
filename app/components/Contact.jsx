@@ -24,7 +24,7 @@ function Contact() {
     >
       <div className="relative z-10 max-w-320 mx-auto">
         <div className="text-center mb-8 md:mb-10 animate-[fadeIn_1s_ease-in-out]">
-          <h1 className="font-monaspace text-3xl xs:text-4xl md:text-5xl lg:text-6xl xl:text-7xl tracking-wide font-semibold capitalize text-slate-50 mb-6">
+          <h1 className="font-monaspace text-3xl xs:text-4xl md:text-5xl lg:text-6xl xl:text-7xl tracking-wide font-semibold capitalize text-slate-50 mb-6" id="headerText">
             Contact
           </h1>
         </div>

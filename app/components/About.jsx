@@ -124,7 +124,7 @@ function About({ id }) {
       >
         <h1
           ref={headingRef}
-          className="font-monaspace text-3xl xs:text-4xl md:text-5xl lg:text-6xl xl:text-7xl tracking-wide font-semibold capitalize text-slate-50"
+          className="font-monaspace text-3xl xs:text-4xl md:text-5xl lg:text-6xl xl:text-7xl tracking-wide font-semibold capitalize text-slate-50" id="headerText"
         >
           WHAT IS INNOVENTIONS?
         </h1>

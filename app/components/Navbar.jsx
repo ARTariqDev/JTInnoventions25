@@ -36,7 +36,7 @@ function Navbar() {
     >
       <div className="flex flex-col sm:flex-row sm:justify-between mx-auto w-full text-white">
         <div className="flex justify-between items-center">
-          <h2 className="text-lg md:text-xl lg:text-2xl font-extrabold">
+          <h2 className="text-lg md:text-xl lg:text-2xl" id="headerText">
             JT Innoventions'25{" "}
           </h2>
           <button
