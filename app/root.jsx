@@ -7,20 +7,9 @@ import {
   ScrollRestoration,
 } from "react-router";
 import "./app.css";
+import Logo from "./assets/logo.png";
 
-
-export const links = () => [
-  { rel: "preconnect", href: "https://fonts.googleapis.com" },
-  {
-    rel: "preconnect",
-    href: "https://fonts.gstatic.com",
-    crossOrigin: "anonymous",
-  },
-  {
-    rel: "stylesheet",
-    href: "https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap",
-  },
-];
+export const links = () => [{ rel: "icon", type: "image/png", href: Logo }];
 
 export function Layout({ children }) {
   return (
@@ -28,7 +17,6 @@ export function Layout({ children }) {
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
         <Meta />
         <Links />
       </head>
