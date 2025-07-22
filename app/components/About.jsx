@@ -30,9 +30,9 @@ function About({ id }) {
         (entries) => {
           entries.forEach((entry) => {
             if (entry.isIntersecting) {
-              entry.target.classList.add("animate-fade-in");
+              entry.target.lastElementChild.classList.add("animate-fade-in");
             } else {
-              entry.target.classList.remove("animate-fade-in");
+              entry.target.lastElementChild.classList.remove("animate-fade-in");
             }
           });
         },
@@ -50,6 +50,7 @@ function About({ id }) {
   return (
     <section
       id={id}
+      ref={contentRef}
       style={{ paddingTop: padding }}
       className="relative overflow-hidden pb-8 sm:pb-10 md:pb-12 lg:pb-14 px-4 xs:px-8 md:px-15 w-full text-center text-slate-300"
     >
@@ -118,13 +119,11 @@ function About({ id }) {
         </svg>
       </div>
 
-      <div
-        ref={contentRef}
-        className="relative max-w-320 mx-auto z-30 opacity-0"
-      >
+      <div className="relative max-w-320 mx-auto z-30 opacity-0">
         <h1
           ref={headingRef}
-          className="font-monaspace text-3xl xs:text-4xl md:text-5xl lg:text-6xl xl:text-7xl tracking-wide font-semibold capitalize text-slate-50" id="headerText"
+          className="font-monaspace text-3xl xs:text-4xl md:text-5xl lg:text-6xl xl:text-7xl tracking-wide font-semibold capitalize text-slate-50"
+          id="headerText"
         >
           WHAT IS INNOVENTIONS?
         </h1>
