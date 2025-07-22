@@ -16,7 +16,12 @@ export default function Categories() {
       </h1>
       <div className="flex flex-wrap gap-10 md:gap-x-20 xl:gap-x-24 md:gap-y-16 justify-evenly max-w-[1600px] mx-auto">
         {categoryData.map((c) => (
-          <Card description={c.description} img={c.img} pdfLink={c.pdfLink} />
+          <Card
+            key={crypto.randomUUID()}
+            description={c.description}
+            img={c.img}
+            pdfLink={c.pdfLink}
+          />
         ))}
       </div>
     </section>
