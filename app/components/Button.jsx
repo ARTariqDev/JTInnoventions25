@@ -50,7 +50,6 @@ const Button = ({
         background: `${color}`,
       }}
     >
-
       <span
         className="absolute inset-0 pointer-events-none rounded-md border z-10 transition-opacity duration-300 ease-out"
         style={{
@@ -63,7 +62,6 @@ const Button = ({
           boxShadow: hovered ? `0 0 10px ${glowColor}` : "none",
         }}
       />
-
 
       {ripples.map((ripple) => (
         <span
@@ -80,7 +78,7 @@ const Button = ({
         />
       ))}
 
-      <span className="relative z-20 font-poppins uppercase tracking-widest">
+      <span className="relative z-20 text-lg uppercase tracking-widest">
         {text}
       </span>
     </button>

@@ -1,4 +1,7 @@
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEnvelope, faPhone } from "@fortawesome/free-solid-svg-icons";
+import { faFacebook, faInstagram } from "@fortawesome/free-brands-svg-icons";
 
 function Contact() {
   const ref = useRef(null);
@@ -46,14 +49,14 @@ function Contact() {
               <p className="text-sm mb-1 flex items-center font-open-sans">
                 {/* <span className="w-1 h-1 bg-blue-400 rounded-full mr-2"></span> */}
                 <span className="mr-2 text-red-500">
-                  <i className="fas fa-phone"></i>
+                  <FontAwesomeIcon icon={faPhone} size="lg" />
                 </span>
                 +92 316 4699448
               </p>
               <p className="text-sm break-words flex items-center font-open-sans">
                 {/* <span className="w-1 h-1 bg-blue-400 rounded-full mr-2"></span> */}
                 <span className="mr-2 text-red-500">
-                  <i className="fas fa-envelope"></i>
+                  <FontAwesomeIcon icon={faEnvelope} size="lg" />
                 </span>
                 haarisusman20@gmail.com
               </p>
@@ -73,14 +76,14 @@ function Contact() {
               <p className="text-sm mb-1 flex items-center font-open-sans">
                 {/* <span className="w-1 h-1 bg-cyan-400 rounded-full mr-2"></span> */}
                 <span className="mr-2 text-red-500">
-                  <i className="fas fa-phone"></i>
+                  <FontAwesomeIcon icon={faPhone} size="lg" />
                 </span>
                 +92 310 0853171
               </p>
               <p className="text-sm break-words flex items-center font-open-sans">
                 {/* <span className="w-1 h-1 bg-cyan-400 rounded-full mr-2"></span> */}
                 <span className="mr-2 text-red-500">
-                  <i className="fas fa-envelope"></i>
+                  <FontAwesomeIcon icon={faEnvelope} size="lg" />
                 </span>
                 adilaliazfar@gmail.com
               </p>
@@ -124,7 +127,7 @@ function Contact() {
           >
             <div className="absolute -inset-3 rounded-xl bg-gradient-to-r from-pink-500/20 to-purple-500/20 blur-lg opacity-60 group-hover:opacity-100 transition duration-500 animate-pulse"></div>
             <div className="relative text-4xl sm:text-5xl text-slate-300 hover:text-pink-400 transition duration-300 transform group-hover:scale-110">
-              <i className="fab fa-instagram"></i>
+              <FontAwesomeIcon icon={faInstagram} />
             </div>
           </a>
           <a
@@ -134,7 +137,7 @@ function Contact() {
           >
             <div className="absolute -inset-3 rounded-xl bg-gradient-to-r from-blue-500/20 to-cyan-500/20 blur-lg opacity-60 group-hover:opacity-100 transition duration-500 animate-pulse"></div>
             <div className="relative text-4xl sm:text-5xl text-slate-300 hover:text-blue-400 transition duration-300 transform group-hover:scale-110">
-              <i className="fas fa-envelope"></i>
+              <FontAwesomeIcon icon={faEnvelope} />
             </div>
           </a>
           <a
@@ -146,7 +149,7 @@ function Contact() {
           >
             <div className="absolute -inset-3 rounded-xl bg-gradient-to-r from-blue-600/20 to-blue-400/20 blur-lg opacity-60 group-hover:opacity-100 transition duration-500 animate-pulse"></div>
             <div className="relative text-4xl sm:text-5xl text-slate-300 hover:text-blue-500 transition duration-300 transform group-hover:scale-110">
-              <i className="fab fa-facebook"></i>
+              <FontAwesomeIcon icon={faFacebook} />
             </div>
           </a>
         </div>
