@@ -14,7 +14,7 @@ export default function Categories() {
       >
         CATEGORIES
       </h1>
-      <div className="flex flex-wrap gap-10 md:gap-x-20 xl:gap-x-24 md:gap-y-16 justify-evenly max-w-[1600px] mx-auto">
+      <div className="flex flex-wrap gap-10 md:gap-x-20 xl:gap-x-24 md:gap-y-16 justify-evenly max-w-[1600px] mx-auto cards">
         {categoryData.map((c) => (
           <Card
             key={crypto.randomUUID()}

@@ -1,10 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Monoton&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Monoton&display=swap");
 @import "tailwindcss";
 
 @font-face {
-  font-family: 'Vermin';
-  src: url('./assets/vermin-vibes-2.regular.otf') format('opentype');
+  font-family: "Vermin";
+  src: url("./assets/vermin-vibes-2.regular.otf") format("opentype");
   font-weight: normal;
   font-style: normal;
 }
@@ -12,33 +12,32 @@
 @theme {
   --color-primary: #111;
   --color-secondary: #1b76ff;
-  --font-poppins: "Poppins", Arial, sans-serif;
-  --font-roboto: "Roboto", Arial, sans-serif;
   --font-space: "Monaspace Neon", monospace;
-  --font-open-sans: "Open Sans", sans-serif;
   --font-monaspace: "Monaspace Neon", monospace;
   --breakpoint-xs: 30rem; /* 480px*/
 }
 
+html {
+  scroll-behavior: smooth;
+  font-size: 14px;
+}
+
 * {
-  font-family:monospace; 
+  font-family: monospace;
 }
 
 #date {
-  font-family: 'Vermin', sans-serif;
+  font-family: "Vermin", sans-serif;
   font-size: 2.5rem;
   color: #ffffff;
-  text-shadow: 
-    0 0 5px rgba(0, 102, 255, 0.5),   /* subtle cyan core glow */
-    0 0 7px rgba(0, 140, 255, 0.7),  /* medium cyan halo */
-    0 0 10px rgba(0, 102, 255, 0.9);  /* wide outer cyan glow */
+  text-shadow: 0 0 5px rgba(0, 102, 255, 0.5),
+    /* subtle cyan core glow */ 0 0 7px rgba(0, 140, 255, 0.7),
+    /* medium cyan halo */ 0 0 10px rgba(0, 102, 255, 0.9); /* wide outer cyan glow */
 }
 
 #headerText {
   font-family: "Vermin", sans-serif;
 }
-
-
 
 .monoton-regular {
   font-family: "Monoton", sans-serif;
@@ -92,6 +91,17 @@ nav li:not(:last-child) {
   nav li:not(:last-child) {
     border-bottom: 0;
   }
+}
+
+.cards:has(.card:hover) .card a {
+  filter: blur(4px);
+  opacity: 0.6;
+  transition: all 0.2s ease;
+}
+
+.cards .card:hover a {
+  filter: none !important;
+  opacity: 1 !important;
 }
 
 @keyframes ripple {
@@ -333,8 +343,4 @@ nav li:not(:last-child) {
 #spotlight {
   transition: background 0.1s ease-out;
   mix-blend-mode: screen;
-}
-
-html {
-  scroll-behavior: smooth;
 }
