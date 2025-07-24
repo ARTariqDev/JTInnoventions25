@@ -2,23 +2,23 @@ function HeroBg() {
   return (
     <picture>
       <source
-        srcSet="app/assets/heroImg/hero@500w.jpg"
+        srcSet="app/assets/heroImg/hero@500w.jpg 1x, app/assets/heroImg/hero@914w.jpg 2x"
         media="(max-width: 500px)"
       />
       <source
-        srcSet="app/assets/heroImg/hero@914w.jpg"
+        srcSet="app/assets/heroImg/hero@914w.jpg, app/assets/heroImg/hero@2000w.jpg 2x"
         media="(max-width: 914px)"
       />
       <source
-        srcSet="app/assets/heroImg/hero@1313w.jpg"
+        srcSet="app/assets/heroImg/hero@1313w.jpg, app/assets/heroImg/hero@2000w.jpg 2x"
         media="(max-width: 1313px)"
       />
       <source
-        srcSet="app/assets/heroImg/hero@1500w.jpg"
+        srcSet="app/assets/heroImg/hero@1500w.jpg, app/assets/heroImg/hero.jpg 2x"
         media="(max-width: 1500px)"
       />
       <source
-        srcSet="app/assets/heroImg/hero@2000w.jpg"
+        srcSet="app/assets/heroImg/hero@2000w.jpg, app/assets/heroImg/hero.jpg 2x"
         media="(max-width: 2000px)"
       />
       <source
