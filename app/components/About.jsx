@@ -140,7 +140,13 @@ function About({ id }) {
           <div className="relative group inline-block p-1">
             <div className="absolute inset-0 rounded-lg bg-gradient-to-r blur-xs from-blue-800/20 via-cyan-700/20 to-blue-800/20 opacity-30 group-hover:opacity-100 transition duration-500 animate-pulse"></div>
             <div className="backdrop-blur-xl">
-              <Button text="Categories" color="rgba(17, 17, 17, 0.063)" />
+              <Button
+                text="Categories"
+                color="rgba(17, 17, 17, 0.063)"
+                onClick={() =>
+                  (window.location.href = `${window.location.origin}/categories`)
+                }
+              />
             </div>
           </div>
         </div>
