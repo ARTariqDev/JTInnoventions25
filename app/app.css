@@ -2,6 +2,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Monoton&display=swap");
 @import "tailwindcss";
 
+/*Fonts*/
 @font-face {
   font-family: "Vermin";
   src: url("./assets/vermin-vibes-2.regular.otf") format("opentype");
