@@ -9,6 +9,7 @@
     "typecheck": "react-router typegen && tsc"
   },
   "dependencies": {
+    "@fillout/react": "^3.0.0",
     "@fontsource/monaspace-neon": "^5.2.5",
     "@fortawesome/fontawesome-svg-core": "^6.5.0",
     "@fortawesome/free-brands-svg-icons": "^7.0.0",

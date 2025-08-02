@@ -4,6 +4,7 @@ const routes = [
   layout("routes/layout.jsx", [
     index("routes/home.jsx"),
     route("/categories", "routes/categories.jsx"),
+    route("/register", "routes/register.jsx"),
   ]),
 ];
 

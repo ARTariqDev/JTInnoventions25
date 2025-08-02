@@ -80,7 +80,7 @@ function Navbar() {
             </Link>
           </li>
           <li>
-            <Link className="py-1 px-2 md:px-3" href="">
+            <Link className="py-1 px-2 md:px-3" to="/register">
               Register
             </Link>
           </li>
