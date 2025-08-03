@@ -230,7 +230,7 @@ const Hero = () => {
 
         <div className="text-center px-4 animate-[fadeIn_2s_ease-in-out] mt-3 mb-3">
           <h1 className="text-[5.5rem] text-white font-Vermin" id="date">
-            September <br/>12∘13∘14
+            12∘13∘14 <br/> September
           </h1>
         </div>
       </div>
