@@ -1,13 +1,19 @@
 import React, { useEffect, useState, useRef } from "react";
+import { useNavigate } from "react-router";
 import Logo from "../assets/logo.png";
 import Button from "../components/Button";
 import "../app.css";
 
 const Hero = () => {
+  const navigate = useNavigate();
   const [textAnimationComplete, setTextAnimationComplete] = useState(false);
   const [particles, setParticles] = useState([]);
   const particlesRef = useRef([]);
   const heroRef = useRef(null);
+
+  const handleRegisterClick = () => {
+    navigate("/register");
+  };
 
   useEffect(() => {
     setTextAnimationComplete(true);
@@ -240,7 +246,9 @@ const Hero = () => {
           <div className="absolute -inset-3 rounded-xl bg-gradient-to-r from-blue-600/20 via-cyan-500/20 to-blue-600/20 blur-lg opacity-60 group-hover:opacity-100 transition duration-500 animate-pulse"></div>
           <div className="relative rounded-lg p-1">
             <div className="backdrop-blur-sm rounded-lg transition duration-300">
-              <Button text="REGISTER NOW" color="rgba(17, 17, 17, 0.063)" />
+              <div onClick={handleRegisterClick}>
+                <Button text="REGISTER NOW" color="rgba(17, 17, 17, 0.063)" />
+              </div>
             </div>
           </div>
         </div>

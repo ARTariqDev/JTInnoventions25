@@ -7,7 +7,8 @@ export default function layout() {
   return (
     <main>
       <HeroBg />
-      <div className="fixed inset-0 w-full h-full bg-gradient-to-b from-[#050c1a]/97 via-[#050c1a]/97 to-[#050c1a]/97 z-[-1]" />
+      {/*Fixed this overlay that was causing issues with the bg (it was a really opaque gradient bg before so i changed it to a translucent dark blue */}
+      <div className="fixed inset-0 w-full h-full bg-[#01091f]/96 z-[-1]" />
       <Navbar />
       <Outlet />
       <Footer />
