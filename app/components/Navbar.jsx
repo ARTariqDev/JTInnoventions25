@@ -9,7 +9,7 @@ function Navbar() {
   
   const handleClick = () => setIsOpen((prev) => !prev);
 
-  // Close menu when clicking on a link
+
   const handleLinkClick = () => setIsOpen(false);
 
   useEffect(() => {
@@ -20,7 +20,7 @@ function Navbar() {
         const scrollY = window.scrollY;
         if (scrollY > prevScrollYRef.current && scrollY > 55) {
           setShowNavbar(false);
-          setIsOpen(false); // Close menu when navbar hides
+          setIsOpen(false);
         } else {
           setShowNavbar(true);
         }
