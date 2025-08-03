@@ -32,8 +32,12 @@ function Navbar() {
         transform: `translateY(${showNavbar ? 0 : "-100%"})`,
         opacity: showNavbar ? 1 : 0,
       }}
-      className="bg-black/40 backdrop-blur-md w-full pt-3 pb-2 px-3 xs:px-6 md:px-10 mb-2 fixed top-0 left-0 right-0 z-50 font-mono tracking-wider shadow-md shadow-blue-500/30 transition-all duration-300 border-4 border-blue-500/30 "
+      className="bg-gradient-to-r from-gray-900 via-black to-gray-900 backdrop-blur-md w-full pt-3 pb-2 px-3 xs:px-6 md:px-10 mb-2 fixed top-0 left-0 right-0 z-50 font-mono tracking-wider shadow-md shadow-blue-500/30 transition-all duration-300 border-4 border-blue-500/30 "
     >
+      <div className="absolute inset-0 opacity-10">
+        <div className="absolute inset-0 bg-[linear-gradient(45deg,transparent_35%,rgba(34,211,238,0.3)_35%,rgba(34,211,238,0.3)_60%,transparent_60%,transparent_80%,rgba(34,211,238,0.3)_80%)] bg-[length:20px_20px] animate-pulse"></div>
+      </div>
+
       <div className="flex flex-col sm:flex-row sm:justify-between mx-auto w-full text-white">
         <div className="flex justify-between items-center">
           <h2 className="text-lg md:text-xl lg:text-2xl" id="headerText">
