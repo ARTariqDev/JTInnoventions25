@@ -348,12 +348,26 @@ nav li:not(:last-child) {
 
 /* Background overlay for debugging */
 body::before {
-  content: '';
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(1, 4, 30, 0.96); /* blue-900/96 ish? */
-  z-index: -1;
+ content: '';
+ position: fixed;
+ top: 0;
+ left: 0;
+ width: 100%;
+ height: 100%;
+ background-image: url('assets/heroImg/hero.jpg');
+ background-size: cover;
+ background-position: center;
+ background-repeat: no-repeat;
+ z-index: -2;
+}
+
+body::after {
+ content: '';
+ position: fixed;
+ top: 0;
+ left: 0;
+ width: 100%;
+ height: 100%;
+ background: rgba(0, 7, 24, 0.96); 
+ z-index: -1;
 }
