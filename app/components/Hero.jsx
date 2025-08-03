@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef, useCallback, useMemo } from "react";
 import { useNavigate } from "react-router";
 import Logo from "../assets/logo.png";
 import Button from "../components/Button";
@@ -10,10 +10,36 @@ const Hero = () => {
   const [particles, setParticles] = useState([]);
   const particlesRef = useRef([]);
   const heroRef = useRef(null);
+  const animationFrameRef = useRef(null);
+  const lastUpdateTimeRef = useRef(0);
 
-  const handleRegisterClick = () => {
+
+  const ANIMATION_INTERVAL = 1000 / 60;
+
+  const handleRegisterClick = useCallback(() => {
     navigate("/register");
-  };
+  }, [navigate]);
+
+
+  const initialParticles = useMemo(() => {
+    return [...Array(100)].map((_, i) => {
+      const baseX = Math.random() * 100;
+      const baseY = Math.random() * 100;
+      return {
+        id: i,
+        size: Math.random() * 2 + 1.5,
+        baseX,
+        baseY,
+        x: baseX,
+        y: baseY,
+        scatterX: 0,
+        scatterY: 0,
+        scattered: false,
+        speed: Math.random() * 1 + 0.5,
+        phase: Math.random() * Math.PI * 2,
+      };
+    });
+  }, []);
 
   useEffect(() => {
     setTextAnimationComplete(true);
@@ -21,35 +47,24 @@ const Hero = () => {
 
   useEffect(() => {
     if (textAnimationComplete && particles.length === 0) {
-      const newParticles = [...Array(100)].map((_, i) => {
-        const baseX = Math.random() * 100;
-        const baseY = Math.random() * 100;
-        return {
-          id: i,
-          size: Math.random() * 2 + 1.5,
-          baseX,
-          baseY,
-          x: baseX,
-          y: baseY,
-          scatterX: 0,
-          scatterY: 0,
-          scattered: false,
-          speed: Math.random() * 1 + 0.5,
-          phase: Math.random() * Math.PI * 2,
-        };
-      });
-
-      setParticles(newParticles);
-      particlesRef.current = newParticles;
+      setParticles(initialParticles);
+      particlesRef.current = initialParticles;
     }
-  }, [textAnimationComplete, particles.length]);
+  }, [textAnimationComplete, particles.length, initialParticles]);
+
 
   useEffect(() => {
-    let animationFrame;
-    const animate = () => {
-      const time = performance.now() / 1000;
+    const animate = (currentTime) => {
+      if (currentTime - lastUpdateTimeRef.current < ANIMATION_INTERVAL) {
+        animationFrameRef.current = requestAnimationFrame(animate);
+        return;
+      }
 
-      particlesRef.current = particlesRef.current.map((p) => {
+      lastUpdateTimeRef.current = currentTime;
+      const time = currentTime / 1000;
+
+      // Update particles in place to avoid array recreation
+      const updatedParticles = particlesRef.current.map((p) => {
         const floatX = Math.sin(time * p.speed + p.phase) * 3;
         const floatY = Math.cos(time * p.speed + p.phase) * 3;
 
@@ -61,90 +76,135 @@ const Hero = () => {
         };
       });
 
-      setParticles([...particlesRef.current]);
-      animationFrame = requestAnimationFrame(animate);
+      particlesRef.current = updatedParticles;
+      setParticles(updatedParticles);
+      
+      animationFrameRef.current = requestAnimationFrame(animate);
     };
 
-    if (textAnimationComplete) {
-      animationFrame = requestAnimationFrame(animate);
+    if (textAnimationComplete && particles.length > 0) {
+      animationFrameRef.current = requestAnimationFrame(animate);
     }
 
-    return () => cancelAnimationFrame(animationFrame);
-  }, [textAnimationComplete]);
+    return () => {
+      if (animationFrameRef.current) {
+        cancelAnimationFrame(animationFrameRef.current);
+      }
+    };
+  }, [textAnimationComplete, particles.length]);
 
-  useEffect(() => {
-    const updateParticlesFromPosition = (x, y) => {
-      particlesRef.current = particlesRef.current.map((p) => {
-        const distanceX = p.x - x;
-        const distanceY = p.y - y;
-        const distance = Math.sqrt(distanceX ** 2 + distanceY ** 2);
 
-        if (distance < 12) {
-          const scatterStrength = (12 - distance) * 0.3;
-          const angle = Math.atan2(p.y - y, p.x - x);
-          const scatterX = Math.cos(angle) * scatterStrength;
-          const scatterY = Math.sin(angle) * scatterStrength;
+  const updateParticlesFromPosition = useCallback((x, y) => {
+    particlesRef.current = particlesRef.current.map((p) => {
+      const distanceX = p.x - x;
+      const distanceY = p.y - y;
+      const distance = Math.sqrt(distanceX ** 2 + distanceY ** 2);
 
+      if (distance < 12) {
+        const scatterStrength = (12 - distance) * 0.3;
+        const angle = Math.atan2(p.y - y, p.x - x);
+        const scatterX = Math.cos(angle) * scatterStrength;
+        const scatterY = Math.sin(angle) * scatterStrength;
+
+        return {
+          ...p,
+          scattered: true,
+          scatterX,
+          scatterY,
+        };
+      } else if (p.scattered) {
+        const returnSpeed = 0.05;
+        const newScatterX = p.scatterX * (1 - returnSpeed);
+        const newScatterY = p.scatterY * (1 - returnSpeed);
+
+        if (Math.abs(newScatterX) < 0.05 && Math.abs(newScatterY) < 0.05) {
           return {
             ...p,
-            scattered: true,
-            scatterX,
-            scatterY,
-          };
-        } else if (p.scattered) {
-          const returnSpeed = 0.05;
-          const newScatterX = p.scatterX * (1 - returnSpeed);
-          const newScatterY = p.scatterY * (1 - returnSpeed);
-
-          if (Math.abs(newScatterX) < 0.05 && Math.abs(newScatterY) < 0.05) {
-            return {
-              ...p,
-              scattered: false,
-              scatterX: 0,
-              scatterY: 0,
-            };
-          }
-
-          return {
-            ...p,
-            scatterX: newScatterX,
-            scatterY: newScatterY,
+            scattered: false,
+            scatterX: 0,
+            scatterY: 0,
           };
         }
 
-        return p;
-      });
-    };
+        return {
+          ...p,
+          scatterX: newScatterX,
+          scatterY: newScatterY,
+        };
+      }
 
-    const handleMouseMove = (e) => {
+      return p;
+    });
+  }, []);
+
+
+  const throttledUpdateRef = useRef(null);
+  const throttleMouseMove = useCallback((e) => {
+    if (throttledUpdateRef.current) return;
+    
+    throttledUpdateRef.current = setTimeout(() => {
       if (!heroRef.current) return;
       const rect = heroRef.current.getBoundingClientRect();
       const x = ((e.clientX - rect.left) / rect.width) * 100;
       const y = ((e.clientY - rect.top) / rect.height) * 100;
       updateParticlesFromPosition(x, y);
-    };
+      throttledUpdateRef.current = null;
+    }, 16);
+  }, [updateParticlesFromPosition]);
 
-    const handleTouch = (e) => {
+  const throttleTouch = useCallback((e) => {
+    if (throttledUpdateRef.current) return;
+    
+    throttledUpdateRef.current = setTimeout(() => {
       if (!heroRef.current) return;
       const rect = heroRef.current.getBoundingClientRect();
       const touch = e.touches[0];
       const x = ((touch.clientX - rect.left) / rect.width) * 100;
       const y = ((touch.clientY - rect.top) / rect.height) * 100;
       updateParticlesFromPosition(x, y);
-    };
+      throttledUpdateRef.current = null;
+    }, 16);
+  }, [updateParticlesFromPosition]);
 
+  useEffect(() => {
     const el = heroRef.current;
     if (textAnimationComplete && el) {
-      el.addEventListener("mousemove", handleMouseMove);
-      el.addEventListener("touchstart", handleTouch);
-      el.addEventListener("touchmove", handleTouch);
+      el.addEventListener("mousemove", throttleMouseMove, { passive: true });
+      el.addEventListener("touchstart", throttleTouch, { passive: true });
+      el.addEventListener("touchmove", throttleTouch, { passive: true });
+      
       return () => {
-        el.removeEventListener("mousemove", handleMouseMove);
-        el.removeEventListener("touchstart", handleTouch);
-        el.removeEventListener("touchmove", handleTouch);
+        el.removeEventListener("mousemove", throttleMouseMove);
+        el.removeEventListener("touchstart", throttleTouch);
+        el.removeEventListener("touchmove", throttleTouch);
+        
+        if (throttledUpdateRef.current) {
+          clearTimeout(throttledUpdateRef.current);
+        }
       };
     }
-  }, [textAnimationComplete]);
+  }, [textAnimationComplete, throttleMouseMove, throttleTouch]);
+
+
+  const particleElements = useMemo(() => {
+    return particles.map((particle) => (
+      <div
+        key={particle.id}
+        className="absolute rounded-full bg-blue-400"
+        style={{
+          width: `${particle.size}px`,
+          height: `${particle.size}px`,
+          top: `${particle.y}%`,
+          left: `${particle.x}%`,
+          opacity: particle.opacity ?? 0.6,
+          transform: particle.scattered ? "scale(1.3)" : "scale(1)",
+          transition: "transform 0.2s ease-out",
+          boxShadow: "0 0 8px rgba(96, 165, 250, 0.4)",
+          willChange: "transform, opacity",
+        }}
+      />
+    ));
+  }, [particles]);
 
   return (
     <section
@@ -154,24 +214,10 @@ const Hero = () => {
     >
       {textAnimationComplete && particles.length > 0 && (
         <div className="absolute inset-0 overflow-hidden z-10 pointer-events-none">
-          {particles.map((particle) => (
-            <div
-              key={particle.id}
-              className="absolute rounded-full bg-blue-400"
-              style={{
-                width: `${particle.size}px`,
-                height: `${particle.size}px`,
-                top: `${particle.y}%`,
-                left: `${particle.x}%`,
-                opacity: particle.opacity ?? 0.6,
-                transform: particle.scattered ? "scale(1.3)" : "scale(1)",
-                transition: "transform 0.2s ease-out",
-                boxShadow: "0 0 8px rgba(96, 165, 250, 0.4)",
-              }}
-            />
-          ))}
+          {particleElements}
         </div>
       )}
+
 
       <div className="absolute inset-0 overflow-hidden z-5 pointer-events-none">
         <div className="absolute top-20 right-4 animate-[fadeIn_2s_ease-in-out]">
@@ -218,8 +264,9 @@ const Hero = () => {
           <div className="relative flex-shrink-0 animate-[fadeIn_1.5s_ease-in-out]">
             <img
               src={Logo}
-              className="h-[45vh] lg:h-[55vh] filter drop-shadow-2xl animate-logo-glow relative z-10"
+              className="h-[40vh] lg:h-[55vh] filter drop-shadow-2xl animate-logo-glow relative z-10"
               alt="Logo"
+              loading="eager"
             />
 
             <div className="absolute inset-1 h-full w-full bg-blue-400/20 blur-2xl rounded-full animate-pulse"></div>
@@ -245,8 +292,8 @@ const Hero = () => {
         <div className="relative group">
           <div className="absolute -inset-3 rounded-xl bg-gradient-to-r from-blue-600/20 via-cyan-500/20 to-blue-600/20 blur-lg opacity-60 group-hover:opacity-100 transition duration-500 animate-pulse"></div>
           <div className="relative rounded-lg p-1">
-            <div className="backdrop-blur-sm rounded-lg transition duration-300 ">
-              <div onClick={handleRegisterClick} >
+            <div className="backdrop-blur-sm rounded-lg transition duration-300">
+              <div onClick={handleRegisterClick}>
                 <Button text="REGISTER NOW" color="rgba(17, 17, 17, 0.063)"/>
               </div>
             </div>
@@ -254,7 +301,7 @@ const Hero = () => {
         </div>
       </div>
 
-      <div className="relative mb-1 animate-[fadeIn_2.5s_ease-in-out]">
+      <div className="relative mb-1 animate-[fadeIn_2.5s_ease-in-out] mt-[-0.7em]">
         <div className="w-32 h-1 bg-gradient-to-r from-transparent via-white to-transparent opacity-60 animate-pulse"></div>
         <div className="absolute -top-1 left-0 w-4 h-3 bg-blue-400 opacity-60 animate-pulse"></div>
         <div className="absolute -top-1 right-0 w-4 h-3 bg-blue-400 opacity-60 animate-pulse delay-500"></div>

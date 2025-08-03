@@ -4,7 +4,7 @@ function Footer() {
     "⚬",
     "All rights Reserved",
     "⚬",
-    <>
+    <section className="bottom-0">
       Made By :{" "}
       <a
         href="https://github.com/ARTariqDev"
@@ -25,7 +25,7 @@ function Footer() {
         <span className="relative z-10">Syed Farjad Abbas</span>
         <span className="absolute inset-0 bg-gradient-to-r from-cyan-400/0 via-cyan-400/10 to-cyan-400/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-sm"></span>
       </a>
-    </>,
+    </section>,
     "⚬",
     "Graphics By Abdul Basit",
   ];
