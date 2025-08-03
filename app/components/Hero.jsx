@@ -22,7 +22,7 @@ const Hero = () => {
 
 
   const initialParticles = useMemo(() => {
-    return [...Array(100)].map((_, i) => {
+    return [...Array(75)].map((_, i) => {
       const baseX = Math.random() * 100;
       const baseY = Math.random() * 100;
       return {
