@@ -7,7 +7,7 @@ export default function layout() {
   return (
     <main>
       <HeroBg />
-      <div className="fixed inset-0 w-full h-full bg-[#01091f]/96 z-[-1]" />
+
       <Navbar />
       <Outlet />
       <Footer />
