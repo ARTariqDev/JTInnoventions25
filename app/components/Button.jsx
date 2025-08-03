@@ -45,7 +45,7 @@ const Button = ({
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
       onClick={handleClick}
-      className="relative px-6 py-2 rounded-md text-white font-medium overflow-hidden transition duration-150 active:scale-95 border border-white/20 backdrop-blur-md "
+      className="relative px-6 py-2 rounded-md text-white font-medium overflow-hidden transition duration-150 active:scale-95 border border-white/20 backdrop-blur-md cursor-pointer"
       style={{
         background: `${color}`,
       }}
