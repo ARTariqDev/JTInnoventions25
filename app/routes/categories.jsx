@@ -7,8 +7,7 @@ export function meta() {
 
 export default function Categories() {
   return (
-    <section className="relative h-full pt-22 md:pt-26 lg:pt-28 px-15 md:px-20 pb-20 sm:pb-28 overflow-hidden">
-
+    <section className="relative h-full pt-22 md:pt-26 lg:pt-28 px-15 md:px-20 pb-20 sm:pb-28 ">
       {/* Adding an overlay here for the translucent bg img */}
       <div className="relative z-10">
         <h1

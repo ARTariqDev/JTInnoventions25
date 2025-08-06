@@ -5,14 +5,14 @@ function Card({ img, pdfLink, description }) {
 
       <div className="inline-flex flex-col justify-center items-center relative overflow-hidden rounded-lg border-1 sm:group-hover:rounded-b-none">
         <a
-          className="w-full inline-block bg-blue-900 hover:bg-blue-800 transition-all delay-100 ease-in-out"
+          className="w-full inline-block bg-blue-900 hover:bg-blue-800 active:bg-blue-950 transition-all delay-100 ease-in-out"
           target="_blank"
           href={pdfLink}
         >
           <img src={img} alt="" />
         </a>
       </div>
-      <div className="hidden sm:block absolute bottom-0 left-0 right-0 translate-y-[80%] group-hover:translate-y-[95%] opacity-0 group-hover:opacity-100 pointer-events-none transition-all duration-300 ease-in-out rounded-b-lg">
+      <div className="hidden sm:block absolute bottom-0 left-0 right-0 translate-y-[80%] group-hover:translate-y-[95%] opacity-0 group-hover:opacity-100 pointer-events-none transition-all delay-100 ease-in-out rounded-b-lg">
         <div className="bg-primary text-slate-300 w-full py-5 px-2 text-center">
           <p className="font-medium">{description}</p>
         </div>

@@ -94,15 +94,17 @@ nav li:not(:last-child) {
   }
 }
 
-.cards:has(.card:hover) .card a {
-  filter: blur(4px);
-  opacity: 0.6;
-  transition: all 0.2s ease;
-}
+@media screen and (min-width: 768px) {
+  .cards:has(.card:hover) .card a {
+    filter: blur(4px);
+    opacity: 0.6;
+    transition: all 0.2s ease;
+  }
 
-.cards .card:hover a {
-  filter: none !important;
-  opacity: 1 !important;
+  .cards .card:hover a {
+    filter: none !important;
+    opacity: 1 !important;
+  }
 }
 
 @keyframes ripple {
@@ -362,12 +364,12 @@ nav li:not(:last-child) {
 } */
 
 body::after {
- content: '';
- position: fixed;
- top: 0;
- left: 0;
- width: 100%;
- height: 100%;
- background: rgba(0, 7, 24, 0.94); 
- z-index: -1;
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 7, 24, 0.94);
+  z-index: -1;
 }
