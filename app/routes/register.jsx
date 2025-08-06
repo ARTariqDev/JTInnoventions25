@@ -1,4 +1,4 @@
-import { FilloutStandardEmbed  } from "@fillout/react";
+import { FilloutStandardEmbed } from "@fillout/react";
 
 export function meta() {
   return [{ title: "register" }];
@@ -6,11 +6,12 @@ export function meta() {
 
 function Register() {
   return (
-    <div className="min-h-screen w-full">
-      <div className="h-[100vh] md:h-[100vh] mt-20">
-        <FilloutStandardEmbed 
-          filloutId="8xvLjcSirPus" 
-          inheritParameters 
+    <div className="min-h-screen w-full bg-[#111827] flex justify-center items-center">
+      <div className="pt-20 px-2 flex-1">
+        <FilloutStandardEmbed
+          filloutId="8xvLjcSirPus"
+          inheritParameters
+          dynamicResize
         />
       </div>
     </div>

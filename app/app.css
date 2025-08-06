@@ -347,7 +347,7 @@ nav li:not(:last-child) {
 }
 
 /* Background overlay for debugging */
-body::before {
+/* body::before {
  content: '';
  position: fixed;
  top: 0;
@@ -359,7 +359,7 @@ body::before {
  background-position: center;
  background-repeat: no-repeat;
  z-index: -2;
-}
+} */
 
 body::after {
  content: '';
