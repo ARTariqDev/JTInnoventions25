@@ -348,8 +348,8 @@ nav li:not(:last-child) {
   mix-blend-mode: screen;
 }
 
-/* Background overlay for debugging, uncommenting this cause bgs not showing in production again */
- body::before {
+/* Background overlay for debugging , uncommenting since bg doesn't display in production*/
+/* body::before {
  content: '';
  position: fixed;
  top: 0;
@@ -361,7 +361,7 @@ nav li:not(:last-child) {
  background-position: center;
  background-repeat: no-repeat;
  z-index: -2;
-} 
+}
 
 body::after {
   content: "";
