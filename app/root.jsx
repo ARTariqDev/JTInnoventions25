@@ -7,9 +7,9 @@ import {
   ScrollRestoration,
 } from "react-router";
 import "./app.css";
-import Logo from "./og.png";
 
-export const links = () => [{ rel: "icon", type: "image/png", href: Logo }];
+
+export const links = () => [{ rel: "icon", type: "image/png", href: "./og.png" }];
 
 
 
