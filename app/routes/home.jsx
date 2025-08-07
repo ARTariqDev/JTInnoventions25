@@ -3,7 +3,7 @@ import SpotlightCanvas from "../components/SpotlightCanvas";
 import About from "../components/About";
 import Contact from "../components/Contact";
 
-// temporarily moving metadata here for testing
+// transferred metadata here cause it wasn't working in root.jsx
 
 export const meta = () => {
   return [
