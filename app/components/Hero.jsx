@@ -7,12 +7,12 @@ import "../app.css";
 const Hero = () => {
   const navigate = useNavigate();
   const [textAnimationComplete, setTextAnimationComplete] = useState(false);
+  const [allContentLoaded, setAllContentLoaded] = useState(false);
   const [particles, setParticles] = useState([]);
   const particlesRef = useRef([]);
   const heroRef = useRef(null);
   const animationFrameRef = useRef(null);
   const lastUpdateTimeRef = useRef(0);
-
 
   const ANIMATION_INTERVAL = 1000 / 60;
 
@@ -20,9 +20,28 @@ const Hero = () => {
     navigate("/register");
   }, [navigate]);
 
+  // Detect if device is mobile
+  const [isMobile, setIsMobile] = useState(false);
+  
+  useEffect(() => {
+    const checkIsMobile = () => {
+      return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || 
+             window.innerWidth < 768;
+    };
+    
+    setIsMobile(checkIsMobile());
+    
+    const handleResize = () => {
+      setIsMobile(checkIsMobile());
+    };
+    
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   const initialParticles = useMemo(() => {
-    return [...Array(75)].map((_, i) => {
+    const particleCount = isMobile ? 40 : 75;
+    return [...Array(particleCount)].map((_, i) => {
       const baseX = Math.random() * 100;
       const baseY = Math.random() * 100;
       return {
@@ -39,19 +58,43 @@ const Hero = () => {
         phase: Math.random() * Math.PI * 2,
       };
     });
-  }, []);
+  }, [isMobile]);
 
+  // Wait for text animation to complete
   useEffect(() => {
     setTextAnimationComplete(true);
   }, []);
 
+
   useEffect(() => {
-    if (textAnimationComplete && particles.length === 0) {
+    if (textAnimationComplete) {
+
+      const checkContentLoaded = () => {
+        const images = document.querySelectorAll('img');
+        const allImagesLoaded = Array.from(images).every(img => img.complete);
+        
+        if (allImagesLoaded) {
+
+          setTimeout(() => {
+            setAllContentLoaded(true);
+          }, 500);
+        } else {
+          // If images aren't loaded yet, wait a bit and check again
+          setTimeout(checkContentLoaded, 100);
+        }
+      };
+
+      checkContentLoaded();
+    }
+  }, [textAnimationComplete]);
+
+  // Load particles only after everything else is loaded
+  useEffect(() => {
+    if (allContentLoaded && particles.length === 0) {
       setParticles(initialParticles);
       particlesRef.current = initialParticles;
     }
-  }, [textAnimationComplete, particles.length, initialParticles]);
-
+  }, [allContentLoaded, particles.length, initialParticles]);
 
   useEffect(() => {
     const animate = (currentTime) => {
@@ -63,7 +106,7 @@ const Hero = () => {
       lastUpdateTimeRef.current = currentTime;
       const time = currentTime / 1000;
 
-      // Update particles in place to avoid array recreation
+
       const updatedParticles = particlesRef.current.map((p) => {
         const floatX = Math.sin(time * p.speed + p.phase) * 3;
         const floatY = Math.cos(time * p.speed + p.phase) * 3;
@@ -82,7 +125,7 @@ const Hero = () => {
       animationFrameRef.current = requestAnimationFrame(animate);
     };
 
-    if (textAnimationComplete && particles.length > 0) {
+    if (allContentLoaded && particles.length > 0) {
       animationFrameRef.current = requestAnimationFrame(animate);
     }
 
@@ -91,8 +134,7 @@ const Hero = () => {
         cancelAnimationFrame(animationFrameRef.current);
       }
     };
-  }, [textAnimationComplete, particles.length]);
-
+  }, [allContentLoaded, particles.length]);
 
   const updateParticlesFromPosition = useCallback((x, y) => {
     particlesRef.current = particlesRef.current.map((p) => {
@@ -137,7 +179,6 @@ const Hero = () => {
     });
   }, []);
 
-
   const throttledUpdateRef = useRef(null);
   const throttleMouseMove = useCallback((e) => {
     if (throttledUpdateRef.current) return;
@@ -168,7 +209,7 @@ const Hero = () => {
 
   useEffect(() => {
     const el = heroRef.current;
-    if (textAnimationComplete && el) {
+    if (allContentLoaded && el) {
       el.addEventListener("mousemove", throttleMouseMove, { passive: true });
       el.addEventListener("touchstart", throttleTouch, { passive: true });
       el.addEventListener("touchmove", throttleTouch, { passive: true });
@@ -183,8 +224,7 @@ const Hero = () => {
         }
       };
     }
-  }, [textAnimationComplete, throttleMouseMove, throttleTouch]);
-
+  }, [allContentLoaded, throttleMouseMove, throttleTouch]);
 
   const particleElements = useMemo(() => {
     return particles.map((particle) => (
@@ -212,12 +252,11 @@ const Hero = () => {
       className="relative min-h-screen w-full flex flex-col items-center justify-start overflow-hidden pb-5 md:pb-8"
       id="Hero"
     >
-      {textAnimationComplete && particles.length > 0 && (
+      {allContentLoaded && particles.length > 0 && (
         <div className="absolute inset-0 overflow-hidden z-10 pointer-events-none">
           {particleElements}
         </div>
       )}
-
 
       <div className="absolute inset-0 overflow-hidden z-5 pointer-events-none">
         <div className="absolute top-20 right-4 animate-[fadeIn_2s_ease-in-out]">
