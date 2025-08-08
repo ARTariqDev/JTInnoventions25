@@ -349,7 +349,8 @@ nav li:not(:last-child) {
 }
 
 /* Background overlay for debugging , uncommenting since bg doesn't display in production*/
-body::before {
+/* Commenting to check if it's working in production
+/* body::before {
   content: "";
   position: fixed;
   top: 0;
@@ -361,7 +362,7 @@ body::before {
   background-position: center;
   background-repeat: no-repeat;
   z-index: -2;
-}
+} */
 
 body::after {
   content: "";
