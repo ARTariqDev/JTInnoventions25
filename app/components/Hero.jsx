@@ -79,7 +79,7 @@ const Hero = () => {
             setAllContentLoaded(true);
           }, 500);
         } else {
-          // If images aren't loaded yet, wait a bit and check again
+  
           setTimeout(checkContentLoaded, 100);
         }
       };
