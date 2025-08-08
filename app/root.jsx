@@ -21,7 +21,7 @@ export function Layout({ children }) {
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="google-site-verification" content="Gea7yC6X5XPs53TWI4ss7y6pDV98nTTxUZ6YouJDkps" /> {/* adding this meta html tag here for google search console */}
-        
+        <link rel="icon" type="image/x-icon" href="https://jt-innoventions25.vercel.app/og.png" />
         <Meta />
         <Links />
         {/* Basic meta tags are sufficient for SEO */}
