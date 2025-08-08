@@ -5,7 +5,7 @@ function Card({ img, pdfLink, description, compulsory }) {
     <article className="card relative max-w-40 sm:max-w-50 md:max-w-60 xl:max-w-65 2xl:max-w-75 hover:scale-105 transition-transform delay-100 ease-out group hover:z-20 hover:drop-shadow-xl hover:drop-shadow-cyan-900">
       <div className="absolute -inset-3 rounded-xl bg-gradient-to-r from-blue-600/20 via-cyan-500/20 to-blue-600/20 blur-lg opacity-60 group-hover:opacity-100 transition duration-500 animate-pulse"></div>
       {compulsory && (
-        <div className="absolute top-0 right-0 w-[60%] z-10">
+        <div className="absolute top-0 right-0 z-10">
           <Tag text={"Compulsory"} />
         </div>
       )}

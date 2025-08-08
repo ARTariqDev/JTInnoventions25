@@ -11,7 +11,7 @@ import MindsInMotion from "./assets/CategoriesImg/mindsInMotion.webp";
 import Panacea from "./assets/CategoriesImg/panacea.webp";
 import Projectx from "./assets/CategoriesImg/projectx.webp";
 import Steam from "./assets/CategoriesImg/steam.webp";
-// import dassp from "./assets/CategoriesImg/dassp.webp"
+import Decodum from "./assets/CategoriesImg/decodum.png";
 
 const categoryData = [
   {
@@ -38,8 +38,7 @@ const categoryData = [
   },
   {
     compulsory: false,
-    //TODO: Need decodum img
-    img: BitByBit,
+    img: Decodum,
     pdfLink: "https://jtinnoventions.com/studyguides/bitbybit.pdf",
     description:
       "Decipher cryptography, different languages and codes to assess pattern recognition in Decodum. In fact why wait, here’s a code to get ahead: ... . . / -.-- --- ..- / --- -. / .---- ..---",
