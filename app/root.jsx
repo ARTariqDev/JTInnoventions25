@@ -7,6 +7,7 @@ import {
   ScrollRestoration,
 } from "react-router";
 import "./app.css";
+import { SpeedInsights } from "@vercel/speed-insights/react"
 
 
 export const links = () => [{ rel: "icon", type: "image/png", href: "https://jt-innoventions25.vercel.app/og.png" }];
@@ -30,6 +31,7 @@ export function Layout({ children }) {
         {children}
         <ScrollRestoration />
         <Scripts />
+        <SpeedInsights/>
       </body>
     </html>
   );
