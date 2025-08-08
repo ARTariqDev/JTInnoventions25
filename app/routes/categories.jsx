@@ -7,7 +7,7 @@ export function meta() {
 
 export default function Categories() {
   return (
-    <section className="relative h-full pt-22 md:pt-26 lg:pt-28 px-15 md:px-20 pb-20 sm:pb-28 ">
+    <section className="relative h-full pt-22 md:pt-26 lg:pt-28 px-8 md:px-20 pb-20 sm:pb-28 ">
       {/* Adding an overlay here for the translucent bg img */}
       <div className="relative z-10">
         <h1
@@ -16,13 +16,14 @@ export default function Categories() {
         >
           CATEGORIES
         </h1>
-        <div className="flex flex-wrap gap-10 md:gap-x-20 xl:gap-x-24 md:gap-y-16 justify-evenly max-w-[1600px] mx-auto cards">
+        <div className="flex flex-wrap gap-y-8 gap-x-6 md:gap-x-14 xl:gap-x-20 md:gap-y-16 lg:gap-y-20 justify-evenly max-w-[1600px] mx-auto cards">
           {categoryData.map((c) => (
             <Card
               key={crypto.randomUUID()}
               description={c.description}
               img={c.img}
               pdfLink={c.pdfLink}
+              compulsory={c.compulsory}
             />
           ))}
         </div>

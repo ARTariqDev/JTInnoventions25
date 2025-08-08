@@ -12,7 +12,7 @@ function Footer() {
         rel="noopener noreferrer"
         className="relative text-cyan-400 hover:text-cyan-300 font-mono transition-all duration-300 hover:shadow-[0_0_8px_rgba(34,211,238,0.5)] hover:scale-105 border-b border-transparent hover:border-cyan-300 group"
       >
-        <span className="relative z-10">Abdur Rehman Tariq</span>
+        <span className="relative z-9">Abdur Rehman Tariq</span>
         <span className="absolute inset-0 bg-gradient-to-r from-cyan-400/0 via-cyan-400/10 to-cyan-400/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-sm"></span>
       </a>{" "}
       &{" "}
@@ -22,7 +22,7 @@ function Footer() {
         rel="noopener noreferrer"
         className="relative text-cyan-400 hover:text-cyan-300 font-mono transition-all duration-300 hover:shadow-[0_0_8px_rgba(34,211,238,0.5)] hover:scale-105 border-b border-transparent hover:border-cyan-300 group"
       >
-        <span className="relative z-10">Syed Farjad Abbas</span>
+        <span className="relative z-9">Syed Farjad Abbas</span>
         <span className="absolute inset-0 bg-gradient-to-r from-cyan-400/0 via-cyan-400/10 to-cyan-400/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-sm"></span>
       </a>
     </section>,
