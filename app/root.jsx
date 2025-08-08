@@ -7,6 +7,8 @@ import {
   ScrollRestoration,
 } from "react-router";
 import "./app.css";
+import { Analytics } from "@vercel/analytics/react"
+import { SpeedInsights } from "@vercel/speed-insights/react"
 
 
 
@@ -37,7 +39,13 @@ export function Layout({ children }) {
 }
 
 export default function App() {
-  return <Outlet />;
+  return (
+  <>
+  <Outlet />
+  <Analytics/>
+  <SpeedInsights />
+  </>
+  );
 }
 
 export function ErrorBoundary({ error }) {
