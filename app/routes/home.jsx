@@ -7,7 +7,7 @@ import Contact from "../components/Contact";
 
 export const meta = () => {
   return [
-    { title: "Innoventions'25 - 3-Day Science Olympiad by LGS JT | Pakistan's Premier Science Competition" },
+    { title: "JT Innoventions'25" },
     { 
       name: "description", 
       content: "Innoventions'25 is a 3-day Science Olympiad organized by LGS JT, showcasing categories spanning Science, Mathematics, IT, Robotics, Astronomy and more. The event is designed to engage students from all over Pakistan, nurturing their skills in creativity, innovation, and critical thinking. Building on a legacy of excellence in successful competitive science events, Innoventions '25 provides a platform for fostering scientific curiosity and creative problem-solving.", 
