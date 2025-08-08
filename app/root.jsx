@@ -9,7 +9,7 @@ import {
 import "./app.css";
 
 
-export const links = () => [{ rel: "icon", type: "image/png", href: "./og.png" }];
+export const links = () => [{ rel: "icon", type: "image/png", href: "https://jt-innoventions25.vercel.app/og.png" }];
 
 
 
