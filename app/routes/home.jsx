@@ -12,7 +12,7 @@ export const meta = () => {
       name: "description", 
       content: "Innoventions'25 is a 3-day Science Olympiad organized by LGS JT, showcasing categories spanning Science, Mathematics, IT, Robotics, Astronomy and more. The event is designed to engage students from all over Pakistan, nurturing their skills in creativity, innovation, and critical thinking. Building on a legacy of excellence in successful competitive science events, Innoventions '25 provides a platform for fostering scientific curiosity and creative problem-solving.", 
     },
-    { name: "keywords", content: "Innoventions 2025, Science Olympiad, LGS JT, Lahore Grammar School, science competition, mathematics, robotics, astronomy, IT, Pakistan students, STEM education, science fair" },
+    { name: "keywords", content: "Innoventions 2025, Science Olympiad, LGS, JT, Lahore Grammar School,mathematics,JT Innoventions 25" },
     { name: "author", content: "LGS JT" },
     { name: "robots", content: "index, follow" },
 
