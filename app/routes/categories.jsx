@@ -24,6 +24,7 @@ export default function Categories() {
               img={c.img}
               pdfLink={c.pdfLink}
               compulsory={c.compulsory}
+              gradient={c.gradient}
             />
           ))}
         </div>
