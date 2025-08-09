@@ -43,13 +43,13 @@ export default function Layout() {
 
       {/* moved the HUD corner here so they display over other sections as well */}
       <div
-        className={`fixed ${topOffset} left-6 w-16 h-16 border-t-2 border-l-2 border-blue-400/30 animate-pulse`}
+        className={`fixed ${topOffset} left-6 w-16 h-16 border-t-2 border-l-2 border-blue-400/30 animate-pulse z-50`}
       ></div>
       <div
-        className={`fixed ${topOffset} right-6 w-16 h-16 border-t-2 border-r-2 border-blue-400/30 animate-pulse [animation-delay:300ms]`}
+        className={`fixed ${topOffset} right-6 w-16 h-16 border-t-2 border-r-2 border-blue-400/30 animate-pulse [animation-delay:300ms] z-50`}
       ></div>
-      <div className="fixed bottom-6 left-6 w-16 h-16 border-b-2 border-l-2 border-blue-400/30 animate-pulse [animation-delay:600ms]"></div>
-      <div className="fixed bottom-6 right-6 w-16 h-16 border-b-2 border-r-2 border-blue-400/30 animate-pulse [animation-delay:900ms]"></div>
+      <div className="fixed bottom-6 left-6 w-16 h-16 border-b-2 border-l-2 border-blue-400/30 animate-pulse [animation-delay:600ms] z-50"></div>
+      <div className="fixed bottom-6 right-6 w-16 h-16 border-b-2 border-r-2 border-blue-400/30 animate-pulse [animation-delay:900ms] z-50"></div>
     </main>
   );
 }

@@ -131,7 +131,7 @@ function Contact() {
             </div>
           </a>
           <a
-            href="mailto:jtinnoventions24@gmail.com"
+            href="mailto:Jtinnoventions25@gmail.com"
             className="relative group"
             aria-label="Email"
           >
