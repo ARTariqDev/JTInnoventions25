@@ -7,11 +7,11 @@ export function meta() {
 function Register() {
   return (
     <div className="min-h-screen w-full bg-[#111827] flex justify-center items-center">
-      <div className="pt-20 px-2 flex-1">
+      <div className="h-[100vh] w-[100vw] pt-15">
         <FilloutStandardEmbed
           filloutId="8xvLjcSirPus"
-          inheritParameters
-          dynamicResize
+          data-fillout-inherit-parameters
+          data-fillout-dynamic-resize
         />
       </div>
     </div>
