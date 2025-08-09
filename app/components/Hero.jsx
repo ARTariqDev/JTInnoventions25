@@ -249,7 +249,7 @@ const Hero = () => {
   return (
     <section
       ref={heroRef}
-      className="relative min-h-screen w-full flex flex-col items-center justify-start overflow-hidden pb-5 md:pb-8"
+      className="relative h-[100vh] w-full flex flex-col items-center justify-start overflow-hidden pb-5 md:pb-8"
       id="Hero"
     >
       {allContentLoaded && particles.length > 0 && (
@@ -303,7 +303,7 @@ const Hero = () => {
           <div className="relative flex-shrink-0 animate-[fadeIn_1.5s_ease-in-out]">
             <img
               src={Logo}
-              className="h-[40vh] lg:h-[55vh] filter drop-shadow-2xl animate-logo-glow relative z-10"
+              className="h-[39vh] lg:h-[50vh] filter drop-shadow-2xl animate-logo-glow relative z-10"
               alt="Logo"
               loading="eager"
             />
@@ -369,10 +369,7 @@ const Hero = () => {
         </div>
       </div>
 
-      <div className="absolute top-20 left-8 w-16 h-16 border-t-2 border-l-2 border-blue-400/30 animate-pulse"></div>
-      <div className="absolute top-20 right-8 w-16 h-16 border-t-2 border-r-2 border-blue-400/30 animate-pulse delay-300"></div>
-      <div className="absolute bottom-8 left-8 w-16 h-16 border-b-2 border-l-2 border-blue-400/30 animate-pulse delay-600"></div>
-      <div className="absolute bottom-8 right-8 w-16 h-16 border-b-2 border-r-2 border-blue-400/30 animate-pulse delay-900"></div>
+      
     </section>
   );
 };
