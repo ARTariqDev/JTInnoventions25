@@ -1,44 +1,15 @@
-import { useState, useEffect, useRef } from "react";
+import { useState } from "react";
 import { Link } from "react-router";
 import "../app.css";
 
 function Navbar() {
-  const [showNavbar, setShowNavbar] = useState(true);
   const [isOpen, setIsOpen] = useState(false);
-  const prevScrollYRef = useRef(0);
   
   const handleClick = () => setIsOpen((prev) => !prev);
-
-
   const handleLinkClick = () => setIsOpen(false);
 
-  useEffect(() => {
-    let timeout;
-    const handleScroll = () => {
-      clearTimeout(timeout);
-      timeout = setTimeout(() => {
-        const scrollY = window.scrollY;
-        if (scrollY > prevScrollYRef.current && scrollY > 55) {
-          setShowNavbar(false);
-          setIsOpen(false);
-        } else {
-          setShowNavbar(true);
-        }
-        prevScrollYRef.current = scrollY;
-      }, 100);
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
   return (
-    <nav
-      style={{
-        transform: `translateY(${showNavbar ? 0 : "-100%"})`,
-        opacity: showNavbar ? 1 : 0,
-      }}
-      className="bg-gradient-to-r from-gray-900 via-black to-gray-900 backdrop-blur-md w-full pt-3 pb-2 px-3 xs:px-6 md:px-10 mb-2 fixed top-0 left-0 right-0 z-50 font-mono tracking-wider shadow-md shadow-blue-500/30 transition-all duration-300 border-4 border-blue-500/30"
-    >
+    <nav className="bg-gradient-to-r from-gray-900 via-black to-gray-900 backdrop-blur-md w-full pt-3 pb-2 px-3 xs:px-6 md:px-10 mb-2 fixed top-0 left-0 right-0 z-50 font-mono tracking-wider shadow-md shadow-blue-500/30 transition-all duration-300 border-4 border-blue-500/30">
       <div className="absolute inset-0 opacity-10">
         <div className="absolute inset-0 bg-[linear-gradient(45deg,transparent_35%,rgba(34,211,238,0.3)_35%,rgba(34,211,238,0.3)_60%,transparent_60%,transparent_80%,rgba(34,211,238,0.3)_80%)] bg-[length:20px_20px] animate-pulse"></div>
       </div>
