@@ -15,7 +15,7 @@ export default function Categories() {
         >
           CATEGORIES <br/>
         </h1>
-        <h2 className="font-monaspace text-md xs:text-sm lg:text-xl xl:text-2xl tracking-wide  text-slate-50/30 mb-12 md:mb-15 text-center mt-[-2rem]" id="headerText">Study Guides will be released 2 weeks in advance</h2>
+        <h2 className="font-monaspace text-md xs:text-sm lg:text-xl xl:text-2xl tracking-wide  text-slate-50/30 mb-12 md:mb-15 text-center mt-[-2rem]" id="headerText">Study guides will be made available two weeks before the event</h2>
 
         <div className="flex flex-wrap gap-y-8 gap-x-6 md:gap-x-14 xl:gap-x-20 md:gap-y-16 lg:gap-y-20 justify-evenly max-w-[1600px] mx-auto cards">
           {categoryData.map((c) => (
