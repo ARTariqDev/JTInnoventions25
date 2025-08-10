@@ -22,7 +22,7 @@ export default function Categories() {
               key={c.pdfLink || c.title} // replaced UUID with this cause it didn't work in some older browsers (like my phones)
               description={c.description}
               img={c.img}
-              pdfLink={c.pdfLink}
+              pdfLink={"https://jtinnoventions.com/categories"} // changed from c.pdfLink to this until new study guides a re released
               compulsory={c.compulsory}
               gradient={c.gradient}
             />
