@@ -36,7 +36,7 @@ const categoryData = [
     img: Fantasm,
     pdfLink: "https://jtinnoventions.com/studyguides/fantasm.pdf",
     description:
-      "The plot thickens in our literature-meets-science category. Fantasm expects nothing short of a novel's worth of world-building. Your ink-pot better be full, that Dune fan-fiction isn't going to write itself.",
+      "The plot thickens in our pop culture category. Fantasm amalgamates the thrill of comic-book storytelling with world-building in recognisable scenes.",
     gradient: "from-red-700/20 via-red-500/20 to-orange-600/20",
   },
   {
