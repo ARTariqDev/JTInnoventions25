@@ -52,7 +52,7 @@ const categoryData = [
     img: MindsInMotion,
     pdfLink: "https://jtinnoventions.com/studyguides/mindsinmotion.pdf",
     description:
-      "Achieve a fully functional frontal-lube before your mid-twenties with Minds in Motion. Side-effects may include: a crippling addiction to self-diagnose psychological illness.",
+      "Achieve a fully functional frontal-lobe before your mid-twenties with Minds in Motion. Side-effects may include: a crippling addiction to self-diagnose psychological illness.",
     gradient: "from-pink-500/20 via-purple-400/20 to-blue-500/20",
   },
   {
