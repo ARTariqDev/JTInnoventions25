@@ -44,6 +44,7 @@ export const meta = () => {
     { name: "geo.placename", content: "Lahore, Punjab, Pakistan" },
     { name: "geo.position", content: "31.5204;74.3587" },
     { name: "ICBM", content: "31.5204, 74.3587" },
+    {name: "google-site-verification", content: "kU86qvaNYBivvaBfptQkGRatQU9nN7ifNL8LZyfKXFI"}
   ];
 };
 
