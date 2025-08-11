@@ -2,6 +2,7 @@ import React, { useEffect, useState, useRef, useCallback, useMemo } from "react"
 import { useNavigate } from "react-router";
 import Logo from "../assets/logo.png";
 import Button from "../components/Button";
+import CountdownTimer from "../components/Timer"; // Adjust path as needed
 import "../app.css";
 
 const Hero = () => {
@@ -22,21 +23,24 @@ const Hero = () => {
 
   // Detect if device is mobile
   const [isMobile, setIsMobile] = useState(false);
-  
+
   useEffect(() => {
     const checkIsMobile = () => {
-      return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || 
-             window.innerWidth < 768;
+      return (
+        /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+          navigator.userAgent
+        ) || window.innerWidth < 768
+      );
     };
-    
+
     setIsMobile(checkIsMobile());
-    
+
     const handleResize = () => {
       setIsMobile(checkIsMobile());
     };
-    
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   const initialParticles = useMemo(() => {
@@ -60,26 +64,21 @@ const Hero = () => {
     });
   }, [isMobile]);
 
-  // Wait for text animation to complete
   useEffect(() => {
     setTextAnimationComplete(true);
   }, []);
 
-
   useEffect(() => {
     if (textAnimationComplete) {
-
       const checkContentLoaded = () => {
-        const images = document.querySelectorAll('img');
-        const allImagesLoaded = Array.from(images).every(img => img.complete);
-        
-        if (allImagesLoaded) {
+        const images = document.querySelectorAll("img");
+        const allImagesLoaded = Array.from(images).every((img) => img.complete);
 
+        if (allImagesLoaded) {
           setTimeout(() => {
             setAllContentLoaded(true);
           }, 500);
         } else {
-  
           setTimeout(checkContentLoaded, 100);
         }
       };
@@ -106,7 +105,6 @@ const Hero = () => {
       lastUpdateTimeRef.current = currentTime;
       const time = currentTime / 1000;
 
-
       const updatedParticles = particlesRef.current.map((p) => {
         const floatX = Math.sin(time * p.speed + p.phase) * 3;
         const floatY = Math.cos(time * p.speed + p.phase) * 3;
@@ -121,7 +119,7 @@ const Hero = () => {
 
       particlesRef.current = updatedParticles;
       setParticles(updatedParticles);
-      
+
       animationFrameRef.current = requestAnimationFrame(animate);
     };
 
@@ -180,32 +178,38 @@ const Hero = () => {
   }, []);
 
   const throttledUpdateRef = useRef(null);
-  const throttleMouseMove = useCallback((e) => {
-    if (throttledUpdateRef.current) return;
-    
-    throttledUpdateRef.current = setTimeout(() => {
-      if (!heroRef.current) return;
-      const rect = heroRef.current.getBoundingClientRect();
-      const x = ((e.clientX - rect.left) / rect.width) * 100;
-      const y = ((e.clientY - rect.top) / rect.height) * 100;
-      updateParticlesFromPosition(x, y);
-      throttledUpdateRef.current = null;
-    }, 16);
-  }, [updateParticlesFromPosition]);
+  const throttleMouseMove = useCallback(
+    (e) => {
+      if (throttledUpdateRef.current) return;
 
-  const throttleTouch = useCallback((e) => {
-    if (throttledUpdateRef.current) return;
-    
-    throttledUpdateRef.current = setTimeout(() => {
-      if (!heroRef.current) return;
-      const rect = heroRef.current.getBoundingClientRect();
-      const touch = e.touches[0];
-      const x = ((touch.clientX - rect.left) / rect.width) * 100;
-      const y = ((touch.clientY - rect.top) / rect.height) * 100;
-      updateParticlesFromPosition(x, y);
-      throttledUpdateRef.current = null;
-    }, 16);
-  }, [updateParticlesFromPosition]);
+      throttledUpdateRef.current = setTimeout(() => {
+        if (!heroRef.current) return;
+        const rect = heroRef.current.getBoundingClientRect();
+        const x = ((e.clientX - rect.left) / rect.width) * 100;
+        const y = ((e.clientY - rect.top) / rect.height) * 100;
+        updateParticlesFromPosition(x, y);
+        throttledUpdateRef.current = null;
+      }, 16);
+    },
+    [updateParticlesFromPosition]
+  );
+
+  const throttleTouch = useCallback(
+    (e) => {
+      if (throttledUpdateRef.current) return;
+
+      throttledUpdateRef.current = setTimeout(() => {
+        if (!heroRef.current) return;
+        const rect = heroRef.current.getBoundingClientRect();
+        const touch = e.touches[0];
+        const x = ((touch.clientX - rect.left) / rect.width) * 100;
+        const y = ((touch.clientY - rect.top) / rect.height) * 100;
+        updateParticlesFromPosition(x, y);
+        throttledUpdateRef.current = null;
+      }, 16);
+    },
+    [updateParticlesFromPosition]
+  );
 
   useEffect(() => {
     const el = heroRef.current;
@@ -213,12 +217,12 @@ const Hero = () => {
       el.addEventListener("mousemove", throttleMouseMove, { passive: true });
       el.addEventListener("touchstart", throttleTouch, { passive: true });
       el.addEventListener("touchmove", throttleTouch, { passive: true });
-      
+
       return () => {
         el.removeEventListener("mousemove", throttleMouseMove);
         el.removeEventListener("touchstart", throttleTouch);
         el.removeEventListener("touchmove", throttleTouch);
-        
+
         if (throttledUpdateRef.current) {
           clearTimeout(throttledUpdateRef.current);
         }
@@ -263,9 +267,7 @@ const Hero = () => {
           <div className="bg-black/30 backdrop-blur-sm border border-blue-400/20 rounded-md p-2 animate-pulse">
             <div className="flex items-center space-x-2">
               <div className="w-2 h-2 bg-blue-400 rounded-full animate-ping"></div>
-              <span className="text-blue-400 font-mono text-[10px]">
-                Indulge
-              </span>
+              <span className="text-blue-400 font-mono text-[10px]">Indulge</span>
             </div>
           </div>
         </div>
@@ -273,9 +275,7 @@ const Hero = () => {
           <div className="bg-black/30 backdrop-blur-sm border border-cyan-400/20 rounded-md p-2 animate-pulse">
             <div className="flex items-center space-x-2">
               <div className="w-2 h-2 bg-cyan-400 rounded-full animate-ping"></div>
-              <span className="text-cyan-400 font-mono text-[10px]">
-                Invent
-              </span>
+              <span className="text-cyan-400 font-mono text-[10px]">Invent</span>
             </div>
           </div>
         </div>
@@ -283,9 +283,7 @@ const Hero = () => {
           <div className="bg-black/30 backdrop-blur-sm border border-blue-300/20 rounded-md p-2 animate-pulse">
             <div className="flex flex-col items-center space-y-1">
               <div className="w-2 h-2 bg-blue-300 rounded-full animate-ping"></div>
-              <span className="text-blue-300 font-mono text-[10px]">
-                Innovate
-              </span>
+              <span className="text-blue-300 font-mono text-[10px]">Innovate</span>
             </div>
           </div>
         </div>
@@ -314,10 +312,14 @@ const Hero = () => {
           </div>
         </div>
 
-        <div className="text-center px-4 animate-[fadeIn_2s_ease-in-out] mt-3 mb-3">
+        <div className="text-center px-4 animate-[fadeIn_2s_ease-in-out] mt-[-2rem] mb-3">
           <h1 className="text-[5.5rem] text-[#000000] font-Vermin" id="date">
-            12∘13∘14 <br/> September
+            12∘13∘14 <br /> September
           </h1>
+
+          <div className="mt-4">
+            <CountdownTimer targetDate="2025-09-12T00:00:00" />
+          </div>
         </div>
       </div>
 
@@ -333,7 +335,7 @@ const Hero = () => {
           <div className="relative rounded-lg p-1">
             <div className="backdrop-blur-sm rounded-lg transition duration-300">
               <div onClick={handleRegisterClick}>
-                <Button text="REGISTER NOW" color="rgba(17, 17, 17, 0.063)"/>
+                <Button text="REGISTER NOW" color="rgba(17, 17, 17, 0.063)" />
               </div>
             </div>
           </div>
@@ -358,18 +360,12 @@ const Hero = () => {
                 strokeWidth="2.5"
                 viewBox="0 0 24 24"
               >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M19 9l-7 7-7-7"
-                />
+                <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
               </svg>
             </div>
           </div>
         </div>
       </div>
-
-      
     </section>
   );
 };

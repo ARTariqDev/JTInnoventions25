@@ -36,6 +36,10 @@ html {
   0 0 7px rgba(0, 102, 255, 0.9); 
 }
 
+#Timer {
+    font-family: "Vermin", sans-serif;
+}
+
 #headerText {
   font-family: "Vermin", sans-serif;
 }
