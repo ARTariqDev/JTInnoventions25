@@ -84,7 +84,7 @@ const categoryData = [
     img: Daedalus,
     pdfLink: "https://jtinnoventions.com/studyguides/daedalus.pdf",
     description:
-      "Put your engineering prowess to the test, Daedalus Apprenticeship can simultaneously ask you to build a car chassis and a motor engine.",
+      "Build, Break. Innovate. Put your engineering prowess to the test in Daedalus's Apprentice. Optimize systems or troubleshoot mechanical designs by thinking like a true engineer.",
     gradient: "from-blue-400/20 via-cyan-300/20 to-blue-500/20",
   },
   {
@@ -116,7 +116,7 @@ const categoryData = [
     img: Projectx,
     pdfLink: "https://jtinnoventions.com/studyguides/projectx.pdf",
     description:
-      "Building Mindstorm Legos pays off in Project X. Program to perform autonomous functions and integrate coding with real-world applications in our robotics category.",
+      "Building electronic circuit boards in Project X. Program to perform autonomous functions and integrate coding with real-world applications in our robotics category.",
     gradient: "from-red-600/20 via-orange-500/20 to-red-500/20",
   },
   {
