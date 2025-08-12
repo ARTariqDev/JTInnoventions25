@@ -43,7 +43,7 @@ const CountdownTimer = ({ targetDate }) => {
         const isChanged = current !== previous;
 
         return (
-          <div key={unit} className="flex flex-col items-center">
+          <div key={unit} className="flex flex-col items-center mt-[1.5rem]">
             <span
               key={current} // key helps trigger re-render to animate
               className={`text-md sm:text-sm font-extrabold bg-gradient-to-r from-blue-400 to-cyan-500 bg-clip-text text-transparent drop-shadow-[0_0_8px_rgba(59,130,246,0.6)] transition-transform duration-300 ${
