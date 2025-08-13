@@ -1,4 +1,3 @@
-// src/components/Sponsors.jsx
 import React from "react";
 
 const sponsors = [
