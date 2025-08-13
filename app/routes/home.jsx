@@ -1,6 +1,7 @@
 import Hero from "../components/Hero";
 import SpotlightCanvas from "../components/SpotlightCanvas";
 import About from "../components/About";
+import Sponsors from "../components/Sponsors";
 import Contact from "../components/Contact";
 
 // transferred metadata here cause it wasn't working in root.jsx
@@ -55,6 +56,7 @@ export default function Home() {
       <Hero id="hero" />
       <div className="border-4 border-blue-900/30 w-full">
         <About id="about" />
+        <Sponsors id="sponsors" />
         <Contact id="contact" />
       </div>
     </main>

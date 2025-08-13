@@ -94,6 +94,7 @@ function Navbar() {
             { to: "/#about", text: "About" },
             { to: "/categories", text: "Categories" },
             { to: "/register", text: "Register", special: true },
+            { to: "/#sponsors", text: "Sponsors"},
             { to: "/#contact", text: "Contact" },
           ].map((link, idx) => (
             <li key={idx} className="w-full sm:w-auto relative group">

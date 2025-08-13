@@ -378,3 +378,17 @@ body::after {
   background: rgba(0, 7, 24, 0.94);
   z-index: -1;
 }
+
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-scroll {
+  display: flex;
+  animation: scroll 15s linear infinite;
+}
