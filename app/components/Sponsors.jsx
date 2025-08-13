@@ -24,19 +24,13 @@ const Sponsors = () => {
 
   useEffect(() => {
     checkOverflow();
-
-    const handleResize = () => {
-      // Small delay so DOM reflow finishes before measuring cause then the state wouldn't trigger
-      setTimeout(checkOverflow, 50);
-    };
-
+    const handleResize = () => setTimeout(checkOverflow, 50);
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, [checkOverflow]);
 
   const logosToShow = shouldScroll ? sponsors.concat(sponsors) : sponsors;
 
-  // Re-check when logo set changes (scroll ↔ no-scroll switch)
   useEffect(() => {
     setTimeout(checkOverflow, 0);
   }, [logosToShow, checkOverflow]);
@@ -62,27 +56,37 @@ const Sponsors = () => {
               shouldScroll ? "animate-scroll" : "justify-center flex-wrap gap-12"
             }`}
           >
-            {logosToShow.map((src, i) => (
-              <div
-                key={i}
-                className={`flex items-center justify-center ${
-                  shouldScroll
-                    ? "h-16 sm:h-20 md:h-24 mx-[6vw] sm:mx-4"
-                    : "h-24 sm:h-28 md:h-32"
-                }`}
-              >
-                <img
-                  src={src}
-                  alt={`Sponsor ${i}`}
-                  className={`max-h-full ${
+            {logosToShow.map((src, i) => {
+              const isTetraPak = src.includes("tetrapak");
+              const isAwais = src.includes("awaisinternational");
+
+              return (
+                <div
+                  key={i}
+                  className={`flex items-center justify-center ${
                     shouldScroll
-                      ? "max-w-[100px] sm:max-w-[140px]"
-                      : "max-w-[160px] sm:max-w-[200px]"
-                  } object-contain rounded-md`}
-                  loading="lazy"
-                />
-              </div>
-            ))}
+                      ? "h-16 sm:h-20 md:h-24 mx-[6vw] sm:mx-4"
+                      : "h-24 sm:h-28 md:h-32"
+                  }`}
+                >
+                  <img
+                    src={src}
+                    alt={`Sponsor ${i}`}
+                    className={`max-h-full object-contain rounded-md ${
+                        shouldScroll
+                        ? isTetraPak
+                            ? "max-w-[200px] sm:max-w-[260px]" // MUCH bigger in scroll mode
+                            : "max-w-[100px] sm:max-w-[140px]"
+                        : isTetraPak
+                            ? "max-w-[280px] sm:max-w-[340px]" // HUGE in no-scroll mode
+                            : "max-w-[160px] sm:max-w-[200px]"
+                    } ${isAwais ? "bg-white p-2 rounded-lg" : ""}`}
+                    loading="lazy"
+                    />
+
+                </div>
+              );
+            })}
           </div>
         </div>
       </div>
