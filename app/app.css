@@ -391,4 +391,5 @@ body::after {
 .animate-scroll {
   display: flex;
   animation: scroll 15s linear infinite;
+  -webkit-animation: scroll 15s linear infinite;
 }
