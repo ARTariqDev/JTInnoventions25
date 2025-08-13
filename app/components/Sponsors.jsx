@@ -57,13 +57,19 @@ const Sponsors = () => {
 
   return (
     <div
-      className="w-screen min-h-[35vh] bg-black flex flex-col items-center justify-center overflow-hidden"
+      className="w-screen min-h-[35vh] bg-black flex flex-col items-center justify-center overflow-hidden relative border-t-[0.3rem] border-b-[0.3rem] border-blue-900/40 p-5"
       id="sponsors"
     >
-        
       <h1 className="text-white text-4xl sm:text-5xl font-bold mb-6" id="headerText">
         Sponsors
       </h1>
+
+
+      {!allLoaded && (
+        <div className="absolute inset-0 flex justify-center items-center bg-black bg-opacity-80 z-10">
+          <div className="w-12 h-12 border-4 border-blue-400 border-t-transparent rounded-full animate-spin"></div>
+        </div>
+      )}
 
       <div className="relative w-full overflow-hidden">
         <div
