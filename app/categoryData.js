@@ -3,7 +3,7 @@ import BitByBit from "./assets/CategoriesImg/bitbybit.webp";
 import CygnusVeil from "./assets/CategoriesImg/cygnusveil.webp";
 import Daedalus from "./assets/CategoriesImg/daedalus.webp";
 import Dassp from "./assets/CategoriesImg/dassp.webp";
-import Enviorothon from "./assets/CategoriesImg/enviorothon.webp";
+import Envirothon from "./assets/CategoriesImg/envirothon.webp";
 import Fantasm from "./assets/CategoriesImg/fantasm.webp";
 import Feynmans from "./assets/CategoriesImg/feynmans.webp";
 import Infinitesima from "./assets/CategoriesImg/infinitesima.webp";
@@ -120,8 +120,8 @@ const categoryData = [
   },
   {
     compulsory: false,
-    img: Enviorothon,
-    pdfLink: "https://jtinnoventions.com/categories",
+    img: Envirothon,
+    pdfLink: "/StudyGuides/Envirothon.pdf",
     description:
       "Global temperatures are rising! Investigate climate change and help pass ecological solutions to overcome a global catastrophe in our environment category.",
     gradient: "from-green-600/20 via-emerald-500/20 to-green-700/20",
