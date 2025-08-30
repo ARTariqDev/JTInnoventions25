@@ -3,7 +3,7 @@ import BitByBit from "./assets/CategoriesImg/bitbybit.webp";
 import CygnusVeil from "./assets/CategoriesImg/cygnusveil.webp";
 import Daedalus from "./assets/CategoriesImg/daedalus.webp";
 import Dassp from "./assets/CategoriesImg/dassp.webp";
-// import Enviorothon from "./assets/CategoriesImg/enviorothon.webp";
+import Enviorothon from "./assets/CategoriesImg/enviorothon.webp";
 import Fantasm from "./assets/CategoriesImg/fantasm.webp";
 import Feynmans from "./assets/CategoriesImg/feynmans.webp";
 import Infinitesima from "./assets/CategoriesImg/infinitesima.webp";
@@ -118,14 +118,14 @@ const categoryData = [
       "Building Mindstorm Legos pays off in Project X. Program to perform autonomous functions and integrate coding with real-world applications in our robotics category.",
     gradient: "from-red-600/20 via-orange-500/20 to-red-500/20",
   },
-  // {
-  //   compulsory: false,
-  //   img: Enviorothon,
-  //   pdfLink: "https://jtinnoventions.com/studyguides/enviorothon.pdf",
-  //   description:
-  //     "Global temperatures are rising! Investigate climate change and help pass ecological solutions to overcome a global catastrophe in our environment category.",
-  //   gradient: "from-green-600/20 via-emerald-500/20 to-green-700/20",
-  // },
+  {
+    compulsory: false,
+    img: Enviorothon,
+    pdfLink: "https://jtinnoventions.com/categories",
+    description:
+      "Global temperatures are rising! Investigate climate change and help pass ecological solutions to overcome a global catastrophe in our environment category.",
+    gradient: "from-green-600/20 via-emerald-500/20 to-green-700/20",
+  },
 ];
 
 export default categoryData;

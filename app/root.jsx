@@ -7,15 +7,16 @@ import {
   ScrollRestoration,
 } from "react-router";
 import "./app.css";
-import { Analytics } from "@vercel/analytics/react"
-import { SpeedInsights } from "@vercel/speed-insights/react"
+import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/react";
 
-
-
-export const links = () => [{ rel: "icon", type: "image/png", href: "https://jt-innoventions25.vercel.app/og.png" }];
-
-
-
+export const links = () => [
+  {
+    rel: "icon",
+    type: "image/png",
+    href: "https://jt-innoventions25.vercel.app/og.png",
+  },
+];
 
 export function Layout({ children }) {
   return (
@@ -23,13 +24,21 @@ export function Layout({ children }) {
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="google-site-verification" content="Gea7yC6X5XPs53TWI4ss7y6pDV98nTTxUZ6YouJDkps" /> {/* adding this meta html tag here for google search console */}
-        <link rel="icon" type="image/x-icon" href="https://jt-innoventions25.vercel.app/og.png" />
+        <meta
+          name="google-site-verification"
+          content="Gea7yC6X5XPs53TWI4ss7y6pDV98nTTxUZ6YouJDkps"
+        />{" "}
+        {/* adding this meta html tag here for google search console */}
+        <link
+          rel="icon"
+          type="image/x-icon"
+          href="https://jt-innoventions25.vercel.app/og.png"
+        />
         <Meta />
         <Links />
         {/* Basic meta tags are sufficient for SEO */}
       </head>
-      <body>
+      <body className="overflow-x-hidden">
         {children}
         <ScrollRestoration />
         <Scripts />
@@ -40,11 +49,11 @@ export function Layout({ children }) {
 
 export default function App() {
   return (
-  <>
-  <Outlet />
-  <Analytics/>
-  <SpeedInsights />
-  </>
+    <>
+      <Outlet />
+      <Analytics />
+      <SpeedInsights />
+    </>
   );
 }
 
