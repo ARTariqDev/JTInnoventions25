@@ -11,7 +11,7 @@ import MindsInMotion from "./assets/CategoriesImg/mindsInMotion.webp";
 import Panacea from "./assets/CategoriesImg/panacea.webp";
 import Projectx from "./assets/CategoriesImg/projectx.webp";
 import Steam from "./assets/CategoriesImg/steam.webp";
-import Decodum from "./assets/CategoriesImg/decodum.png";
+import Decodum from "./assets/CategoriesImg/decodum.webp";
 
 const categoryData = [
   {
