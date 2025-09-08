@@ -7,6 +7,7 @@ const sponsors = [
   "/sponsors/lenovo.webp",
   "/sponsors/tetrapak.png",
   "/sponsors/wewear.gif",
+  "/sponsors/cb.png",
 ];
 
 const Sponsors = () => {
@@ -55,9 +56,20 @@ const Sponsors = () => {
 
   const logosToShow = shouldScroll ? sponsors.concat(sponsors) : sponsors;
 
+  // Group sponsors for desktop layout when not scrolling
+  const groupedSponsors = shouldScroll ? logosToShow : (() => {
+    const prioritySponsors = logosToShow.filter(src => 
+      src.includes("tetrapak") || src.includes("awaisinternational") || src.includes("cb.png")
+    );
+    const otherSponsors = logosToShow.filter(src => 
+      !src.includes("tetrapak") && !src.includes("awaisinternational") && !src.includes("cb.png")
+    );
+    return { prioritySponsors, otherSponsors };
+  })();
+
   return (
     <div
-      className="w-screen min-h-[35vh] bg-black flex flex-col items-center justify-center overflow-hidden relative border-t-[0.3rem] border-b-[0.3rem] border-blue-900/40 p-5"
+      className="w-screen min-h-[35vh] bg-black flex flex-col items-center justify-center overflow-hidden relative border-t-[0.3rem] border-b-[0.3rem] border-blue-900/40 sm:p-[1rem] md:p-2 lg:p-5"
       id="sponsors"
     >
       <h1 className="text-white text-4xl sm:text-5xl font-bold mb-6" id="headerText">
@@ -79,37 +91,82 @@ const Sponsors = () => {
           <div
             className={`flex w-max transition-opacity duration-500 ${
               allLoaded ? "opacity-100" : "opacity-0"
-            } ${shouldScroll ? "animate-scroll" : "justify-center flex-wrap gap-12"}`}
+            } ${shouldScroll ? "animate-scroll" : "justify-center flex-col items-center gap-8"}`}
           >
-            {logosToShow.map((src, i) => {
-              const isTetraPak = src.includes("tetrapak");
-              const isAwais = src.includes("awaisinternational");
+            {shouldScroll ? (
+              // Scrolling layout
+              groupedSponsors.map((src, i) => {
+                const isTetraPak = src.includes("tetrapak");
+                const isAwais = src.includes("awaisinternational");
+                const isCb = src.includes("cb.png");
 
-              return (
-                <div
-                  key={i}
-                  className={`flex items-center justify-center ${
-                    shouldScroll
-                      ? "h-16 sm:h-20 md:h-24 mx-[6vw] sm:mx-4"
-                      : "h-24 sm:h-28 md:h-32"
-                  }`}
-                >
-                  <img
-                    src={src}
-                    alt={`Sponsor ${i}`}
-                    className={`max-h-full object-contain rounded-md ${
-                      shouldScroll
-                        ? isTetraPak
+                return (
+                  <div
+                    key={i}
+                    className="flex items-center justify-center h-16 sm:h-20 md:h-24 mx-[6vw] sm:mx-4"
+                  >
+                    <img
+                      src={src}
+                      alt={`Sponsor ${i}`}
+                      className={`max-h-full object-contain rounded-md ${
+                        isTetraPak
                           ? "max-w-[200px] sm:max-w-[260px]"
-                          : "max-w-[100px] sm:max-w-[140px]"
-                        : isTetraPak
-                          ? "max-w-[280px] sm:max-w-[340px]"
-                          : "max-w-[160px] sm:max-w-[200px]"
-                    } ${isAwais ? "bg-white p-2 rounded-lg" : ""}`}
-                  />
+                          : isCb
+                            ? "max-w-[150px] sm:max-w-[180px]"
+                            : "max-w-[100px] sm:max-w-[140px]"
+                      } ${isAwais ? "bg-white p-2 rounded-lg" : ""} ${isCb ? "bg-blue-600 p-2 rounded-lg" : ""}`}
+                    />
+                  </div>
+                );
+              })
+            ) : (
+              // desktop layout - grouped sponsors
+              <>
+                {/* Platinum sponsors row (TetraPak, Awais, CB) */}
+                <div className="flex justify-center items-center gap-12 mb-8">
+                  {groupedSponsors.prioritySponsors.map((src, i) => {
+                    const isTetraPak = src.includes("tetrapak");
+                    const isAwais = src.includes("awaisinternational");
+                    const isCb = src.includes("cb.png");
+
+                    return (
+                      <div
+                        key={`priority-${i}`}
+                        className="flex items-center justify-center h-24 sm:h-28 md:h-32"
+                      >
+                        <img
+                          src={src}
+                          alt={`Priority Sponsor ${i}`}
+                          className={`max-h-full object-contain rounded-md ${
+                            isTetraPak
+                              ? "max-w-[280px] sm:max-w-[340px]"
+                              : isCb
+                                ? "max-w-[250px] sm:max-w-[280px]"
+                                : "max-w-[180px] sm:max-w-[220px]"
+                          } ${isAwais ? "bg-white p-2 rounded-lg" : ""} ${isCb ? "bg-blue-600 p-2 rounded-lg" : ""}`}
+                        />
+                      </div>
+                    );
+                  })}
                 </div>
-              );
-            })}
+                
+                {/* Other sponsors row */}
+                <div className="flex justify-center items-center flex-wrap gap-12">
+                  {groupedSponsors.otherSponsors.map((src, i) => (
+                    <div
+                      key={`other-${i}`}
+                      className="flex items-center justify-center h-24 sm:h-28 md:h-32"
+                    >
+                      <img
+                        src={src}
+                        alt={`Other Sponsor ${i}`}
+                        className="max-h-full object-contain rounded-md max-w-[180px] sm:max-w-[220px]"
+                      />
+                    </div>
+                  ))}
+                </div>
+              </>
+            )}
           </div>
         </div>
       </div>
