@@ -24,6 +24,7 @@ export function Layout({ children }) {
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="robots" content="noindex, nofollow" /> //taking,the website down, passing the torch on, it was fun while it lasted y'all T-T :]
         <meta
           name="google-site-verification"
           content="Gea7yC6X5XPs53TWI4ss7y6pDV98nTTxUZ6YouJDkps"
